@@ -31,7 +31,6 @@ public class JwtService {
     }
 
     public String generateToken(AppUser userDetails) {
-        map.put("role",userDetails.getRole().getName());
         return generateToken(map, userDetails);
     }
 

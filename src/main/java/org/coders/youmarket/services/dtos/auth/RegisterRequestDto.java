@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.coders.youmarket.enums.RoleEnum;
 
 @Builder @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class RegisterRequestDto {
@@ -14,5 +13,4 @@ public class RegisterRequestDto {
     private String password;
     private String name;
     private String phone;
-    private RoleEnum role;
 }

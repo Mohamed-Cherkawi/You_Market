@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.coders.youmarket.entities.AppUser;
 import org.coders.youmarket.enums.AvailabilityStateEnum;
-import org.coders.youmarket.repositories.UserRepository;
 import org.coders.youmarket.services.dtos.auth.AuthenticationRequestDto;
 import org.coders.youmarket.services.dtos.auth.RegisterRequestDto;
 import org.coders.youmarket.services.dtos.auth.TokenRequestResponse;
 import org.coders.youmarket.services.interfaces.AuthenticationServiceInterface;
-import org.coders.youmarket.services.interfaces.RoleServiceInterface;
 import org.coders.youmarket.services.interfaces.UserServiceInterface;
 import org.coders.youmarket.services.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,12 +22,10 @@ import java.util.UUID;
 @Service @RequiredArgsConstructor
 @Slf4j
 public class AuthenticationService implements AuthenticationServiceInterface {
-    private final UserRepository userRepository;
     private final UserServiceInterface userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final RoleServiceInterface roleService;
 
     @Override
     public TokenRequestResponse register(RegisterRequestDto request) {
@@ -39,13 +35,12 @@ public class AuthenticationService implements AuthenticationServiceInterface {
             return null;
 
         AppUser user = AppUser.builder()
-                .uuid(UUID.randomUUID().toString())
+                .reference(UUID.randomUUID().toString())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
                 .phone(request.getPhone())
                 .status(AvailabilityStateEnum.ONLINE)
-                .role(roleService.findRoleByName(request.getRole()))
                 .build();
 
         try {
