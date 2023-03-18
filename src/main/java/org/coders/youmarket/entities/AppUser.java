@@ -1,5 +1,6 @@
 package org.coders.youmarket.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,11 +20,10 @@ import lombok.Setter;
 import lombok.ToString;
 import org.coders.youmarket.enums.AvailabilityStateEnum;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 
 
 @Entity @Builder @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
@@ -36,7 +36,7 @@ public class AppUser implements UserDetails {
     private Long id;
 
     @Column(name = "uuid", nullable = false, unique = true)
-    private String uuid;
+    private String reference;
 
     @Column( nullable = false, length = 50)
     private String username;
@@ -50,22 +50,31 @@ public class AppUser implements UserDetails {
     @Column(length = 50)
     private String phone;
 
-    @Column(length = 30)
-    private String cin;
+    @ToString.Exclude
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "profile_photo_id", nullable = false)
+    private Photo profilePhoto;
+
+    @ToString.Exclude
+    @ManyToOne(optional = false , cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AvailabilityStateEnum status;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.getName().name()));
+        return null;
     }
+
     @Override
     public String getPassword() {
         return password;
