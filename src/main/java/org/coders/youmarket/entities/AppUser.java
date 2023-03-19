@@ -51,10 +51,8 @@ public class AppUser implements UserDetails {
     @Column(length = 50)
     private String phone;
 
-    @ToString.Exclude
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "profile_photo_id", nullable = false)
-    private Photo profilePhoto;
+    @Column(name = "profile_photo")
+    private String profilePhoto;
 
     @ToString.Exclude
     @ManyToOne(optional = false , cascade = CascadeType.PERSIST)
