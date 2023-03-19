@@ -1,4 +1,4 @@
-package org.coders.youmarket.enums;
+package org.coders.youmarket.enums.vehicle;
 
 public enum VehicleFuelType {
     DIESEL,
