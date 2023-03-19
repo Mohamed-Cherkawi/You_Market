@@ -1,4 +1,4 @@
-package org.coders.youmarket.entities;
+package org.coders.youmarket.entities.vehicle;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,15 +9,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.coders.youmarket.enums.VehicleBodyStyleEnum;
-import org.coders.youmarket.enums.VehicleConditionEnum;
-import org.coders.youmarket.enums.VehicleFuelType;
+import org.coders.youmarket.enums.vehicle.VehicleBodyStyleEnum;
+import org.coders.youmarket.enums.vehicle.VehicleConditionEnum;
+import org.coders.youmarket.enums.vehicle.VehicleFuelType;
+import org.coders.youmarket.enums.vehicle.VehicleTypeEnum;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor @AllArgsConstructor @Builder
 @Table(name = "vehicle_properties")
 public class VehicleProperties {
     @Id
@@ -25,12 +30,19 @@ public class VehicleProperties {
     @SequenceGenerator(name = "vehicle_properties_seq")
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Column(name = "make", nullable = false, length = 70)
     private String make;
+
     @Column(name = "model", nullable = false, length = 100)
     private String model;
+
     @Column(name = "mileage")
     private Integer mileage;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 21)
+    private VehicleTypeEnum type;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "body_style", nullable = false, length = 11)

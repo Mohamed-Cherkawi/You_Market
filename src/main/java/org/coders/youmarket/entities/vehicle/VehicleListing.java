@@ -1,34 +1,35 @@
-package org.coders.youmarket.entities;
+package org.coders.youmarket.entities.vehicle;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.coders.youmarket.enums.VehicleTypeEnum;
+import lombok.experimental.SuperBuilder;
+import org.coders.youmarket.entities.Listing;
 
 import java.time.LocalDate;
 
 @Entity
 @Getter @Setter @ToString
-@NoArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @SuperBuilder
 @PrimaryKeyJoinColumn(name = "listingId")
-public class VehicleListing extends Listing{
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false, length = 21)
-    private VehicleTypeEnum type;
+public class VehicleListing extends Listing {
+
     @Column(name = "purchase_date", nullable = false)
     private LocalDate purchaseDate;
+
     @Column(name = "price", nullable = false)
     private Float price;
+
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "vehicle_properties_id", nullable = false)
-    private VehicleProperties vehicleProperties;
+    private VehicleProperties properties;
+
 }
