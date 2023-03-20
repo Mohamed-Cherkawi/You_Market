@@ -13,4 +13,5 @@ public interface UserServiceInterface {
     AppUser findUserByReference(String reference);
     boolean isUsernameAlreadyExists(String username);
     ResponseEntity<Object> updateUserProfileInfos(ProfileUpdateRequest profileUpdateRequest);
+    ResponseEntity<Object> getUserProfileInfosByReference(String reference);
 }
