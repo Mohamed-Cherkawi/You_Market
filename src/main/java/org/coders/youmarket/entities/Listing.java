@@ -17,6 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -37,4 +38,6 @@ public class Listing {
 
     private String description;
 
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }
