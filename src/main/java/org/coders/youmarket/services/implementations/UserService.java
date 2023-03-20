@@ -70,4 +70,15 @@ public class UserService implements UserServiceInterface {
 
         return ResponseHandler.generateResponse("Profile Has Been Saved Successfully",HttpStatus.OK,EntityMapping.userToProfilePreviewResponse(user));
     }
+
+    @Override
+    public ResponseEntity<Object> getUserProfileInfosByReference(String reference) {
+        AppUser user = userRepository.findByReference(reference).orElse(null);
+
+        if(user == null){
+            return ResponseHandler.generateResponse("No such user with the given reference : " + reference,HttpStatus.BAD_REQUEST);
+        }
+
+        return ResponseHandler.generateResponse("Profile Fetched Successfully",HttpStatus.OK,EntityMapping.userToProfilePreviewResponse(user));
+    }
 }
