@@ -7,8 +7,12 @@ import org.coders.youmarket.entities.Address;
 import org.coders.youmarket.entities.AppUser;
 import org.coders.youmarket.repositories.AddressRepository;
 import org.coders.youmarket.repositories.UserRepository;
+import org.coders.youmarket.services.dtos.response.ResponseHandler;
 import org.coders.youmarket.services.dtos.user.ProfileUpdateRequest;
 import org.coders.youmarket.services.interfaces.UserServiceInterface;
+import org.coders.youmarket.util.EntityMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -45,13 +49,13 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override @Transactional
-    public AppUser updateUserProfileInfos(ProfileUpdateRequest profileUpdateRequest) {
+    public ResponseEntity<Object> updateUserProfileInfos(ProfileUpdateRequest profileUpdateRequest) {
         AppUser user = findUserByReference(profileUpdateRequest.getUserReference());
         if(user == null){
-            log.info("The provided reference : {} does not even exists as user reference in db",profileUpdateRequest.getUserReference());
-            return null;
+            log.info("The provided reference : {} does not even exists as user reference in db", profileUpdateRequest.getUserReference());
+            return ResponseHandler.generateResponse("The provided reference "+ profileUpdateRequest.getUserReference() +" does not even exists as user reference in db", HttpStatus.BAD_REQUEST);
         }
-        Address userAddress = addressRepository.findById(user.getAddress().getId()).get();
+        Address userAddress = addressRepository.findById(user.getAddress().getId()).orElseThrow();
 
         userAddress.setTitle(profileUpdateRequest.getAddress().getTitle());
         userAddress.setDescription(profileUpdateRequest.getAddress().getDescription());
@@ -64,6 +68,6 @@ public class UserService implements UserServiceInterface {
 
         user.setUpdatedAt(LocalDateTime.now());
 
-        return user;
+        return ResponseHandler.generateResponse("Profile Has Been Saved Successfully",HttpStatus.OK,EntityMapping.userToProfilePreviewResponse(user));
     }
 }
