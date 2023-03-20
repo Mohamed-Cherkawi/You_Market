@@ -54,7 +54,6 @@ public class AppUser implements UserDetails {
     @Column(name = "profile_photo")
     private String profilePhoto;
 
-    @ToString.Exclude
     @ManyToOne(optional = false , cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
