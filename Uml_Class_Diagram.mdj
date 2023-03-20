@@ -4835,19 +4835,6 @@
 							"points": "590:763;623:756"
 						},
 						{
-							"_type": "UMLNoteView",
-							"_id": "AAAAAAGG/k1U/CnMmjw=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"left": 459,
-							"top": 270,
-							"width": 84.32080078125,
-							"height": 25,
-							"text": "Inheritance"
-						},
-						{
 							"_type": "UMLGeneralizationView",
 							"_id": "AAAAAAGG/k3Isjrjm+I=",
 							"_parent": {
