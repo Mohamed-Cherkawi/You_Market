@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.coders.youmarket.enums.ListingConditionEnum;
+import org.coders.youmarket.enums.listing.ListingConditionEnum;
 import org.coders.youmarket.enums.item.ListingCategoryEnum;
 
 @Getter @Setter @ToString
