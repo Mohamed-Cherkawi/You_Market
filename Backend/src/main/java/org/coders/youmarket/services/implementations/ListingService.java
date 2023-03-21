@@ -1,5 +1,6 @@
 package org.coders.youmarket.services.implementations;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.coders.youmarket.entities.Listing;
 import org.coders.youmarket.entities.Photo;
@@ -81,17 +82,7 @@ public class ListingService implements ListingServiceInterface {
 
     }
 
-    @Override
-    public ResponseEntity<Object> createListing() {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Object> updateListing() {
-        return null;
-    }
-
-    @Override
+    @Override @Transactional
     public ResponseEntity<Object> deleteListing() {
         return null;
     }
