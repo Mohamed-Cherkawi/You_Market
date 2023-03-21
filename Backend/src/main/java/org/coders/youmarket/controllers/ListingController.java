@@ -15,11 +15,16 @@ public class ListingController {
 
     @GetMapping("/fetching/all")
     public ResponseEntity<Object> getAllListingsApi(){
-        return listingService.getAllListing();
+        return listingService.getAllListings();
     }
 
     @GetMapping("/fetching/single/{listingReference}")
     public ResponseEntity<Object> getListingByReferenceApi(@PathVariable("listingReference") String listingReference){
         return listingService.getListingByReference(listingReference);
+    }
+
+    @GetMapping("/fetching-by-owner/single/{ownerReference}")
+    public ResponseEntity<Object> getAllListingsByOwnerReferenceApi(@PathVariable("ownerReference") String ownerReference){
+        return listingService.getAllListingsByOwnerReference(ownerReference);
     }
 }
