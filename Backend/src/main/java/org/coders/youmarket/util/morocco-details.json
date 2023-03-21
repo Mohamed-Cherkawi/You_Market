@@ -1,0 +1,48 @@
+{
+  "geonameid": 2542007,
+  "name": "Morocco",
+  "code": "MA",
+  "capital": {
+    "name": "Rabat",
+    "geonameid": 2538475
+  },
+  "area_size": "446550.00 sq. km",
+  "population": 36029138,
+  "phone_code": "212",
+  "is_in_eu": false,
+  "languages": {
+    "ar": "Arabic",
+    "ber": "Berber languages",
+    "fr": "French language"
+  },
+  "flag": {
+    "file": "https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Morocco.svg",
+    "emoji": "🇲🇦",
+    "unicode": "U+1F1F2 U+1F1E6"
+  },
+  "tld": ".ma",
+  "depends_on": null,
+  "territories": {},
+  "wiki_id": "Q1028",
+  "wiki_url": "https://en.wikipedia.org/wiki/Morocco",
+  "total_iso_divisions": 12,
+  "total_adm_divisions": 20,
+  "total_cities": 270,
+  "currency": {
+    "code": "MAD",
+    "name": "Moroccan dirham"
+  },
+  "timezone": {
+    "timezone": "Africa/Casablanca",
+    "gtm_offset": 0,
+    "gmt_offset": 0,
+    "is_daylight_saving": false,
+    "code": "+00"
+  },
+  "continent": {
+    "geonameid": 6255146,
+    "name": "Africa",
+    "code": "AF"
+  },
+  "status": "success"
+}
