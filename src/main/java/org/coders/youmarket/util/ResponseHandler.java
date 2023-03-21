@@ -1,4 +1,4 @@
-package org.coders.youmarket.services.dtos.response;
+package org.coders.youmarket.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
