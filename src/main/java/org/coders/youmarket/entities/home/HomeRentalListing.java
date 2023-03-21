@@ -18,8 +18,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "home_rental_listing")
 public class HomeRentalListing extends Listing {
-    @Column(name = "price_per_month", nullable = false)
-    private Float pricePerMonth;
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "address_id", nullable = false)

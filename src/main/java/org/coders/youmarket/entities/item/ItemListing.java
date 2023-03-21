@@ -22,9 +22,6 @@ public class ItemListing extends Listing {
     @Column(name = "title", nullable = false, length = 99)
     private String title;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
-
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
     private Address location;

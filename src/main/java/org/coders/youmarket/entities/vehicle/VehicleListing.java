@@ -25,9 +25,6 @@ public class VehicleListing extends Listing {
     @Column(name = "purchase_date", nullable = false)
     private LocalDate purchaseDate;
 
-    @Column(name = "price", nullable = false)
-    private Float price;
-
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "vehicle_properties_id", nullable = false)
     private VehicleProperties properties;
