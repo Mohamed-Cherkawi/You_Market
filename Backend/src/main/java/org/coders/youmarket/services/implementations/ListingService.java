@@ -22,27 +22,42 @@ import java.util.stream.Collectors;
 public class ListingService implements ListingServiceInterface {
     private final ListingRepository listingRepository;
 
+
     @Override
-    public ResponseEntity<Object> getAllListing() {
-        List<Listing> user = listingRepository.findAll();
+    public ResponseEntity<Object> getAllListings() {
+        List<Listing> listings = listingRepository.findAll();
 
-        Set<ListingOverviewResponse> convertedListings = user.stream()
-                .map(listing -> {
-                    Set<String> assets = listing.getAssets().stream()
-                            .map(Photo::getImageUrl)
-                            .collect(Collectors.toSet());
-
-                     ListingOverviewResponse listingOverview = EntityMapping.userToListingOverviewResponse(listing);
-                     listingOverview.setAssets(assets);
-
-                     return listingOverview;
-                })
-                .collect(Collectors.toSet());
+        if(listings.isEmpty()){
+            return ResponseHandler.generateResponse(
+                    "There Is No Listings To Show",
+                    HttpStatus.NOT_FOUND,
+                    null
+            );
+        }
 
         return ResponseHandler.generateResponse(
                 "Data Fetched Successfully",
                 HttpStatus.OK,
-                convertedListings
+                mapListingsToOverviewResponse(listings)
+        );
+    }
+
+    @Override
+    public ResponseEntity<Object> getAllListingsByOwnerReference(String ownerReference) {
+        List<Listing> listings = listingRepository.findAllByOwnerReference(ownerReference);
+
+        if(listings.isEmpty()){
+            return ResponseHandler.generateResponse(
+                    "There Is No Listings To Show with the given owner reference : " +ownerReference,
+                    HttpStatus.NOT_FOUND,
+                    null
+            );
+        }
+
+        return ResponseHandler.generateResponse(
+                "Data Fetched Successfully",
+                HttpStatus.OK,
+                mapListingsToOverviewResponse(listings)
         );
     }
 
@@ -79,5 +94,20 @@ public class ListingService implements ListingServiceInterface {
     @Override
     public ResponseEntity<Object> deleteListing() {
         return null;
+    }
+
+    private Set<ListingOverviewResponse> mapListingsToOverviewResponse(List<Listing> listings){
+        return listings.stream()
+                .map(listing -> {
+                    Set<String> assets = listing.getAssets().stream()
+                            .map(Photo::getImageUrl)
+                            .collect(Collectors.toSet());
+
+                    ListingOverviewResponse listingOverview = EntityMapping.userToListingOverviewResponse(listing);
+                    listingOverview.setAssets(assets);
+
+                    return listingOverview;
+                })
+                .collect(Collectors.toSet());
     }
 }
