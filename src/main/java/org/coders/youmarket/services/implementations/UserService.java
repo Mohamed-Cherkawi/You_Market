@@ -7,7 +7,7 @@ import org.coders.youmarket.entities.Address;
 import org.coders.youmarket.entities.AppUser;
 import org.coders.youmarket.repositories.AddressRepository;
 import org.coders.youmarket.repositories.UserRepository;
-import org.coders.youmarket.services.dtos.response.ResponseHandler;
+import org.coders.youmarket.util.ResponseHandler;
 import org.coders.youmarket.services.dtos.user.ProfileUpdateRequest;
 import org.coders.youmarket.services.interfaces.UserServiceInterface;
 import org.coders.youmarket.util.EntityMapping;
