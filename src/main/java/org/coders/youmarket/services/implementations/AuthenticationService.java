@@ -8,7 +8,7 @@ import org.coders.youmarket.enums.AvailabilityStateEnum;
 import org.coders.youmarket.services.dtos.auth.AuthenticationRequestDto;
 import org.coders.youmarket.services.dtos.auth.RegisterRequestDto;
 import org.coders.youmarket.services.dtos.auth.TokenRequestResponse;
-import org.coders.youmarket.services.dtos.response.ResponseHandler;
+import org.coders.youmarket.util.ResponseHandler;
 import org.coders.youmarket.services.interfaces.AuthenticationServiceInterface;
 import org.coders.youmarket.services.interfaces.UserServiceInterface;
 import org.coders.youmarket.services.security.JwtService;
