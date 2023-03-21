@@ -6,7 +6,5 @@ public interface ListingServiceInterface {
     ResponseEntity<Object> getAllListings();
     ResponseEntity<Object> getAllListingsByOwnerReference(String ownerReference);
     ResponseEntity<Object> getListingByReference(String reference);
-    ResponseEntity<Object> createListing();
-    ResponseEntity<Object> updateListing();
     ResponseEntity<Object> deleteListing();
 }
