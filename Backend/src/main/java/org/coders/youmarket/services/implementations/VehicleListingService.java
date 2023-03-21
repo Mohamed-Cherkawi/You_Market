@@ -8,7 +8,7 @@ import org.coders.youmarket.enums.listing.ListingTypeEnum;
 import org.coders.youmarket.repositories.VehicleListingRepository;
 import org.coders.youmarket.services.dtos.listing.vehicle.VehicleRequest;
 import org.coders.youmarket.services.interfaces.VehicleListingServiceInterface;
-import org.coders.youmarket.util.DateTimeFormatterUtil;
+import org.coders.youmarket.util.DateTimeParser;
 import org.coders.youmarket.util.EntityMapping;
 import org.coders.youmarket.util.ResponseHandler;
 import org.springframework.http.HttpStatus;
@@ -34,7 +34,7 @@ public class VehicleListingService implements VehicleListingServiceInterface {
                         .collect(Collectors.toSet())
         );
         vehicleListing.setListingReference(UUID.randomUUID().toString());
-        vehicleListing.setPurchaseDate(DateTimeFormatterUtil.getDateFromFormatPattern(
+        vehicleListing.setPurchaseDate(DateTimeParser.getDateFromFormatPattern(
                 vehicleRequest.getPurchaseDate()
         ));
         vehicleListing.setListingType(ListingTypeEnum.VEHICLE);
