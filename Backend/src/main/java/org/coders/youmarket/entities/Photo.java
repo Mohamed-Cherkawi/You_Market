@@ -20,7 +20,7 @@ import lombok.Setter;
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_seq")
-    @SequenceGenerator(name = "photo_seq")
+    @SequenceGenerator(name = "photo_seq" , allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "image_url", nullable = false)
