@@ -1,7 +1,7 @@
 package org.coders.youmarket.enums.vehicle;
 
 public enum VehicleTypeEnum {
-    CAR_TRACK ,
+    CAR_TRUCK,
     MOTORCYCLE,
     POWERSPORT, // Quad
     RV_CAMPER,
