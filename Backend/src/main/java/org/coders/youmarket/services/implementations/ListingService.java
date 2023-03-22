@@ -3,10 +3,11 @@ package org.coders.youmarket.services.implementations;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.coders.youmarket.entities.Listing;
-import org.coders.youmarket.entities.Photo;
+import org.coders.youmarket.enums.listing.ListingTypeEnum;
 import org.coders.youmarket.repositories.ListingRepository;
-import org.coders.youmarket.services.dtos.listing.ListingOverviewResponse;
+import org.coders.youmarket.services.dtos.listing.ListingRequestResponse;
 import org.coders.youmarket.services.interfaces.ListingServiceInterface;
+import org.coders.youmarket.util.AssetsMapper;
 import org.coders.youmarket.util.EntityMapping;
 import org.coders.youmarket.util.HeaderKeyValueResponse;
 import org.coders.youmarket.util.ResponseHandler;
@@ -70,7 +71,7 @@ public class ListingService implements ListingServiceInterface {
                 value -> ResponseHandler.generateResponse(
                         "The Listing Has Ben Fetched Successfully",
                         HttpStatus.OK,
-                        value,
+                        mapListingToItsTypeResponse(value,value.getListingType()),
                         HeaderKeyValueResponse.builder().
                                 key("Listing-Type").
                                 value(value.getListingType().name())
@@ -87,18 +88,33 @@ public class ListingService implements ListingServiceInterface {
         return null;
     }
 
-    private Set<ListingOverviewResponse> mapListingsToOverviewResponse(List<Listing> listings){
+    private Set<ListingRequestResponse> mapListingsToOverviewResponse(List<Listing> listings){
         return listings.stream()
                 .map(listing -> {
-                    Set<String> assets = listing.getAssets().stream()
-                            .map(Photo::getImageUrl)
-                            .collect(Collectors.toSet());
+                    ListingRequestResponse listingRequestResponse = EntityMapping.userToListingOverviewResponse(listing);
+                    listingRequestResponse.setAssets(
+                            AssetsMapper.mapSetOfPhotosToSetOfStrings(listing.getAssets())
+                    );
 
-                    ListingOverviewResponse listingOverview = EntityMapping.userToListingOverviewResponse(listing);
-                    listingOverview.setAssets(assets);
-
-                    return listingOverview;
+                    return listingRequestResponse;
                 })
                 .collect(Collectors.toSet());
+    }
+    private ListingRequestResponse mapListingToItsTypeResponse(Listing listing , ListingTypeEnum listingType){
+        ListingRequestResponse listingRequestResponse ;
+
+        if(listingType.equals(ListingTypeEnum.VEHICLE)){
+            listingRequestResponse = EntityMapping.vehicleListingToVehicleRequest(listing);
+        } else if (listingType.equals(ListingTypeEnum.ITEM)) {
+            listingRequestResponse = EntityMapping.userToListingOverviewResponse(listing);
+        }else {
+            listingRequestResponse = EntityMapping.vehicleListingToVehicleRequest(listing);
+        }
+
+        listingRequestResponse.setAssets(
+                AssetsMapper.mapSetOfPhotosToSetOfStrings(listing.getAssets())
+        );
+
+        return listingRequestResponse;
     }
 }
