@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service @RequiredArgsConstructor
@@ -35,21 +36,63 @@ public class VehicleListingService implements VehicleListingServiceInterface {
         vehicleListing.setListingType(ListingTypeEnum.VEHICLE);
 
         try {
-            vehicleListing = vehicleListingRepository.save(vehicleListing);
-
-            VehicleRequest vehicleResponse = EntityMapping.vehicleListingToVehicleRequest(vehicleListing);
-            vehicleResponse.setAssets(
-                    AssetsMapper.mapSetOfPhotosToSetOfStrings(vehicleListing.getAssets())
-            );
-            return ResponseHandler.generateResponse("The Vehicle Listing Has Been Created Successfully", HttpStatus.CREATED,vehicleResponse);
+            return ResponseHandler.generateResponse(
+                    "The Vehicle Listing Has Been Created Successfully",
+                    HttpStatus.CREATED,
+                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing)));
         }catch (Exception e){
             e.printStackTrace();
-            return ResponseHandler.generateResponse("The Vehicle Listing Hasn't Created , Something went wrong please try again",HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseHandler.generateResponse(
+                    "The Vehicle Listing Hasn't Created , Something went wrong please try again",
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @Override @Transactional
     public ResponseEntity<Object> updateVehicleListing(VehicleRequest vehicleRequest) {
-        return null;
+        VehicleListing vehicleListing = vehicleListingRepository.findByListingReference(vehicleRequest.getListingReference()).orElse(null);
+
+        if(vehicleListing == null){
+            return ResponseHandler.generateResponse(
+                    "There is no listing with the given reference : " + vehicleRequest.getListingReference() + " to be updated !",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        vehicleListing.setDescription(vehicleRequest.getDescription());
+        vehicleListing.setPrice(Float.parseFloat(vehicleRequest.getPrice()));
+        vehicleListing.setAssets(
+                AssetsMapper.mapSetOfStringsToSetOfPhotos(vehicleRequest.getAssets())
+        );
+        vehicleListing.setPurchaseDate(
+                DateTimeParser.getDateFromFormatPattern(vehicleRequest.getPurchaseDate())
+        );
+        vehicleListing.setProperties(
+                EntityMapping.vehiclePropertiesRequestToVehicleProperties(vehicleRequest.getProperties())
+        );
+        vehicleListing.setUpdatedAt(LocalDateTime.now());
+
+        try {
+            return ResponseHandler.generateResponse(
+                    "The Vehicle Listing Has Been Updated Successfully",
+                    HttpStatus.OK,
+                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing)));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseHandler.generateResponse(
+                    "The Vehicle Listing Hasn't Been Updated , Something went wrong please try again",
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    private VehicleRequest mapVehicleListingToVehicleRequestResponse(VehicleListing vehicleListing){
+        VehicleRequest vehicleResponse = EntityMapping.vehicleListingToVehicleRequest(vehicleListing);
+
+        vehicleResponse.setAssets(
+                AssetsMapper.mapSetOfPhotosToSetOfStrings(vehicleListing.getAssets())
+        );
+        vehicleResponse.setUpdatedAt(
+                DateTimeParser.getStringDateOfLocalDateTimeStandardPattern(vehicleListing.getUpdatedAt())
+        );
+        return vehicleResponse;
     }
 }
