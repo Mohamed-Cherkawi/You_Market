@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.coders.youmarket.enums.listing.ListingTypeEnum;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter @Setter @ToString
@@ -16,5 +15,5 @@ public class ListingRequestResponse {
     private String price;
     private String description;
     private ListingTypeEnum listingType;
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 }
