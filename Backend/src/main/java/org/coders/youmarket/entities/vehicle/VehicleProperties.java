@@ -45,7 +45,7 @@ public class VehicleProperties {
     private VehicleTypeEnum type;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "body_style", nullable = false, length = 11)
+    @Column(name = "body_style", length = 11)
     private VehicleBodyStyleEnum bodyStyle;
 
     @Column(name = "has_clean_title")
@@ -59,7 +59,7 @@ public class VehicleProperties {
     @Column(name = "fuel_type", nullable = false, length = 12)
     private VehicleFuelType fuelType;
 
-    @Column(name = "is_manual", nullable = false)
+    @Column(name = "is_manual")
     private Boolean isManual;
 
 }
