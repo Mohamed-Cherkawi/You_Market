@@ -12,6 +12,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,8 @@ import java.util.Set;
 @Getter @Setter @ToString
 public class Listing {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "listing_seq")
+    @SequenceGenerator(name = "listing_seq" , allocationSize = 1)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
