@@ -7,7 +7,6 @@ import org.coders.youmarket.enums.listing.ListingTypeEnum;
 import org.coders.youmarket.repositories.VehicleListingRepository;
 import org.coders.youmarket.services.dtos.listing.vehicle.VehicleRequest;
 import org.coders.youmarket.services.interfaces.VehicleListingServiceInterface;
-import org.coders.youmarket.util.AssetsMapper;
 import org.coders.youmarket.util.DateTimeParser;
 import org.coders.youmarket.util.EntityMapping;
 import org.coders.youmarket.util.ResponseHandler;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service @RequiredArgsConstructor
 public class VehicleListingService implements VehicleListingServiceInterface {
@@ -26,9 +26,6 @@ public class VehicleListingService implements VehicleListingServiceInterface {
     public ResponseEntity<Object> createVehicleListing(VehicleRequest vehicleRequest) {
         VehicleListing vehicleListing = EntityMapping.vehicleRequestToVehicleListing(vehicleRequest);
 
-        vehicleListing.setAssets(
-                AssetsMapper.mapSetOfStringsToSetOfPhotos(vehicleRequest.getAssets())
-        );
         vehicleListing.setListingReference(UUID.randomUUID().toString());
         vehicleListing.setPurchaseDate(DateTimeParser.getDateFromFormatPattern(
                 vehicleRequest.getPurchaseDate()
@@ -39,7 +36,7 @@ public class VehicleListingService implements VehicleListingServiceInterface {
             return ResponseHandler.generateResponse(
                     "The Vehicle Listing Has Been Created Successfully",
                     HttpStatus.CREATED,
-                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing)));
+                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing),false));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseHandler.generateResponse(
@@ -61,7 +58,9 @@ public class VehicleListingService implements VehicleListingServiceInterface {
         vehicleListing.setDescription(vehicleRequest.getDescription());
         vehicleListing.setPrice(Float.parseFloat(vehicleRequest.getPrice()));
         vehicleListing.setAssets(
-                AssetsMapper.mapSetOfStringsToSetOfPhotos(vehicleRequest.getAssets())
+                vehicleRequest.getAssets().stream()
+                        .map(EntityMapping::photoRequestToPhoto)
+                        .collect(Collectors.toSet())
         );
         vehicleListing.setPurchaseDate(
                 DateTimeParser.getDateFromFormatPattern(vehicleRequest.getPurchaseDate())
@@ -75,7 +74,7 @@ public class VehicleListingService implements VehicleListingServiceInterface {
             return ResponseHandler.generateResponse(
                     "The Vehicle Listing Has Been Updated Successfully",
                     HttpStatus.OK,
-                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing)));
+                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing),true));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseHandler.generateResponse(
@@ -84,15 +83,15 @@ public class VehicleListingService implements VehicleListingServiceInterface {
         }
 
     }
-    private VehicleRequest mapVehicleListingToVehicleRequestResponse(VehicleListing vehicleListing){
+    private VehicleRequest mapVehicleListingToVehicleRequestResponse(VehicleListing vehicleListing , boolean setUpdatedAt){
         VehicleRequest vehicleResponse = EntityMapping.vehicleListingToVehicleRequest(vehicleListing);
 
-        vehicleResponse.setAssets(
-                AssetsMapper.mapSetOfPhotosToSetOfStrings(vehicleListing.getAssets())
-        );
-        vehicleResponse.setUpdatedAt(
-                DateTimeParser.getStringDateOfLocalDateTimeStandardPattern(vehicleListing.getUpdatedAt())
-        );
+        if(setUpdatedAt) {
+            vehicleResponse.setUpdatedAt(
+                    DateTimeParser.getStringDateOfLocalDateTimeStandardPattern(vehicleListing.getUpdatedAt())
+            );
+        }
+
         return vehicleResponse;
     }
 }
