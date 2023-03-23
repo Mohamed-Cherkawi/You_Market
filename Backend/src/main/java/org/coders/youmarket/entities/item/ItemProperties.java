@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.coders.youmarket.enums.listing.ListingConditionEnum;
-import org.coders.youmarket.enums.item.ListingCategoryEnum;
 
 @Getter @Setter @ToString
 @Entity
@@ -30,7 +29,7 @@ public class ItemProperties {
     private Long id;
 
     @Column(name = "category", nullable = false, length = 30)
-    private String category = ListingCategoryEnum.Home_Garden.GARDEN.name();
+    private String category;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "condition", nullable = false, length = 13)
