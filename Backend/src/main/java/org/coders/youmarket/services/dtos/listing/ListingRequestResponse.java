@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.coders.youmarket.enums.listing.ListingTypeEnum;
+import org.coders.youmarket.services.dtos.other.PhotoRequest;
 
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 public class ListingRequestResponse {
     private String listingReference;
     private String ownerReference;
-    private Set<String> assets;
+    private Set<PhotoRequest> assets;
     private String price;
     private String description;
     private ListingTypeEnum listingType;
