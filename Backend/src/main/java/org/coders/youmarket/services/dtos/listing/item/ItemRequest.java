@@ -10,7 +10,7 @@ public class ItemRequest extends ListingRequestResponse {
     private String title;
     private AddressRequest location;
     private String publicMeetup;
-    private Boolean doorPickup;
-    private Boolean doorDropOff;
+    private String doorPickup;
+    private String doorDropOff;
     private ItemPropertiesRequest properties;
 }
