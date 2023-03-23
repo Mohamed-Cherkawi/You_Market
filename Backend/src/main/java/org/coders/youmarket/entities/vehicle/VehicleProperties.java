@@ -27,7 +27,7 @@ import org.coders.youmarket.enums.vehicle.VehicleTypeEnum;
 public class VehicleProperties {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehicle_properties_seq")
-    @SequenceGenerator(name = "vehicle_properties_seq")
+    @SequenceGenerator(name = "vehicle_properties_seq" , allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 

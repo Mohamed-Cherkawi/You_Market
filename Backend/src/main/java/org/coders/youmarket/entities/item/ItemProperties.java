@@ -25,7 +25,7 @@ import org.coders.youmarket.enums.item.ListingCategoryEnum;
 public class ItemProperties {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_properties_seq")
-    @SequenceGenerator(name = "item_properties_seq")
+    @SequenceGenerator(name = "item_properties_seq" , allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
