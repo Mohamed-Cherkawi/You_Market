@@ -7,7 +7,6 @@ import org.coders.youmarket.enums.listing.ListingTypeEnum;
 import org.coders.youmarket.repositories.ListingRepository;
 import org.coders.youmarket.services.dtos.listing.ListingRequestResponse;
 import org.coders.youmarket.services.interfaces.ListingServiceInterface;
-import org.coders.youmarket.util.AssetsMapper;
 import org.coders.youmarket.util.EntityMapping;
 import org.coders.youmarket.util.HeaderKeyValueResponse;
 import org.coders.youmarket.util.ResponseHandler;
@@ -84,20 +83,21 @@ public class ListingService implements ListingServiceInterface {
     }
 
     @Override @Transactional
-    public ResponseEntity<Object> deleteListing() {
-        return null;
+    public ResponseEntity<Object> deleteListing(String reference) {
+        Integer response = listingRepository.deleteByListingReference(reference);
+
+        return ( response == 1 )
+                ? ResponseHandler.generateResponse(
+                "The Listing with the " + reference + " reference has been deleted successfully",
+                HttpStatus.GONE)
+                : ResponseHandler.generateResponse(
+                "The Listing with the " + reference + " reference has not been deleted successfully , please try again",
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private Set<ListingRequestResponse> mapListingsToOverviewResponse(List<Listing> listings){
         return listings.stream()
-                .map(listing -> {
-                    ListingRequestResponse listingRequestResponse = EntityMapping.userToListingOverviewResponse(listing);
-                    listingRequestResponse.setAssets(
-                            AssetsMapper.mapSetOfPhotosToSetOfStrings(listing.getAssets())
-                    );
-
-                    return listingRequestResponse;
-                })
+                .map(EntityMapping::userToListingOverviewResponse)
                 .collect(Collectors.toSet());
     }
     private ListingRequestResponse mapListingToItsTypeResponse(Listing listing , ListingTypeEnum listingType){
@@ -110,10 +110,6 @@ public class ListingService implements ListingServiceInterface {
         }else {
             listingRequestResponse = EntityMapping.vehicleListingToVehicleRequest(listing);
         }
-
-        listingRequestResponse.setAssets(
-                AssetsMapper.mapSetOfPhotosToSetOfStrings(listing.getAssets())
-        );
 
         return listingRequestResponse;
     }
