@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface ListingRepository extends JpaRepository<Listing, Long> {
     Optional<Listing> findByListingReference(String reference);
     List<Listing> findAllByOwnerReference(String ownerReference);
+    Integer deleteByListingReference(String reference);
 }
