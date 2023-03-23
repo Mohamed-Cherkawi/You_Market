@@ -36,11 +36,11 @@ public class VehicleListingService implements VehicleListingServiceInterface {
             return ResponseHandler.generateResponse(
                     "The Vehicle Listing Has Been Created Successfully",
                     HttpStatus.CREATED,
-                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing),false));
+                    mapVehicleListingToVehicleRequest(vehicleListingRepository.save(vehicleListing),false));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseHandler.generateResponse(
-                    "The Vehicle Listing Hasn't Created , Something went wrong please try again",
+                    "The Vehicle Listing Hasn't Created , Something went wrong please try again , and make sure all the required attributes are filled up",
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -74,7 +74,7 @@ public class VehicleListingService implements VehicleListingServiceInterface {
             return ResponseHandler.generateResponse(
                     "The Vehicle Listing Has Been Updated Successfully",
                     HttpStatus.OK,
-                    mapVehicleListingToVehicleRequestResponse(vehicleListingRepository.save(vehicleListing),true));
+                    mapVehicleListingToVehicleRequest(vehicleListingRepository.save(vehicleListing),true));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseHandler.generateResponse(
@@ -83,7 +83,7 @@ public class VehicleListingService implements VehicleListingServiceInterface {
         }
 
     }
-    private VehicleRequest mapVehicleListingToVehicleRequestResponse(VehicleListing vehicleListing , boolean setUpdatedAt){
+    private VehicleRequest mapVehicleListingToVehicleRequest(VehicleListing vehicleListing , boolean setUpdatedAt){
         VehicleRequest vehicleResponse = EntityMapping.vehicleListingToVehicleRequest(vehicleListing);
 
         if(setUpdatedAt) {
