@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +45,57 @@ public class ItemListingService implements ItemListingServiceInterface {
 
     @Override
     public ResponseEntity<Object> updateItemListing(ItemRequest itemRequest) {
-        return null;
+        if(itemRequest.getListingReference() == null){
+            return ResponseHandler.generateResponse(
+                    "Can't updated your listing without a reference !",
+                    HttpStatus.BAD_REQUEST);
+        }
+        ItemListing itemListing = itemListingRepository.findByListingReference(itemRequest.getListingReference())
+                .orElse(null);
+
+        if(itemListing == null){
+            return ResponseHandler.generateResponse(
+                    "There is no item listing with the given reference : " + itemRequest.getListingReference() + " to be updated !",
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        itemListing.setDescription(itemRequest.getDescription());
+        itemListing.setPrice(Float.parseFloat(itemRequest.getPrice()));
+        itemListing.setAssets(
+                itemRequest.getAssets().stream()
+                        .map(EntityMapping::photoRequestToPhoto)
+                        .collect(Collectors.toSet())
+        );
+        itemListing.setLocation(
+                EntityMapping.addressRequestToAddress(itemRequest.getLocation())
+        );
+        itemListing.setTitle(itemRequest.getTitle());
+        itemListing.setDoorDropOff(
+                Boolean.parseBoolean(itemRequest.getDoorDropOff())
+        );
+        itemListing.setDoorPickup(
+                Boolean.parseBoolean(itemRequest.getDoorPickup())
+        );
+        itemListing.setPublicMeetup(
+                Boolean.parseBoolean(itemRequest.getPublicMeetup())
+        );
+        itemListing.setProperties(
+                EntityMapping.itemPropertiesRequestToItemProperties(itemRequest.getProperties())
+        );
+        itemListing.setUpdatedAt(LocalDateTime.now());
+
+        try {
+            return ResponseHandler.generateResponse(
+                    "The Item Listing Has Been Updated Successfully",
+                    HttpStatus.OK,
+                    mapItemListingToItemRequest(itemListingRepository.save(itemListing),true));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseHandler.generateResponse(
+                    "The Item Listing Hasn't Been Updated , Something went wrong please try again",
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     private ItemRequest mapItemListingToItemRequest(ItemListing itemListing , boolean setUpdatedAt){
