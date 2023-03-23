@@ -9,6 +9,7 @@ import org.coders.youmarket.enums.vehicle.VehicleTypeEnum;
 
 @Getter @Setter
 public class VehiclePropertiesRequest {
+    private String id;
     private String make;
     private String model;
     private String mileage;
