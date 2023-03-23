@@ -97,7 +97,7 @@ public class ListingService implements ListingServiceInterface {
 
     private Set<ListingRequestResponse> mapListingsToOverviewResponse(List<Listing> listings){
         return listings.stream()
-                .map(EntityMapping::userToListingOverviewResponse)
+                .map(EntityMapping::listingToListingRequestResponse)
                 .collect(Collectors.toSet());
     }
     private ListingRequestResponse mapListingToItsTypeResponse(Listing listing , ListingTypeEnum listingType){
@@ -106,7 +106,7 @@ public class ListingService implements ListingServiceInterface {
         if(listingType.equals(ListingTypeEnum.VEHICLE)){
             listingRequestResponse = EntityMapping.vehicleListingToVehicleRequest(listing);
         } else if (listingType.equals(ListingTypeEnum.ITEM)) {
-            listingRequestResponse = EntityMapping.userToListingOverviewResponse(listing);
+            listingRequestResponse = EntityMapping.listingToItemRequest(listing);
         }else {
             listingRequestResponse = EntityMapping.vehicleListingToVehicleRequest(listing);
         }
