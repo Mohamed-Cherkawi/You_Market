@@ -2,11 +2,13 @@ package org.coders.youmarket.util;
 
 import org.coders.youmarket.entities.AppUser;
 import org.coders.youmarket.entities.Listing;
+import org.coders.youmarket.entities.Photo;
 import org.coders.youmarket.entities.vehicle.VehicleListing;
 import org.coders.youmarket.entities.vehicle.VehicleProperties;
 import org.coders.youmarket.services.dtos.listing.ListingRequestResponse;
 import org.coders.youmarket.services.dtos.listing.vehicle.VehiclePropertiesRequest;
 import org.coders.youmarket.services.dtos.listing.vehicle.VehicleRequest;
+import org.coders.youmarket.services.dtos.other.PhotoRequest;
 import org.coders.youmarket.services.dtos.user.ProfilePreviewResponse;
 import org.modelmapper.ModelMapper;
 
@@ -32,5 +34,9 @@ public class EntityMapping {
 
     public static VehicleProperties vehiclePropertiesRequestToVehicleProperties(VehiclePropertiesRequest vehiclePropertiesRequest){
         return modelMapper.map(vehiclePropertiesRequest, VehicleProperties.class);
+    }
+
+    public static Photo photoRequestToPhoto(PhotoRequest photoRequest){
+        return modelMapper.map(photoRequest,Photo.class);
     }
 }
