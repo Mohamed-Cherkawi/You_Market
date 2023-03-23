@@ -47,11 +47,12 @@ public class VehicleListingService implements VehicleListingServiceInterface {
 
     @Override @Transactional
     public ResponseEntity<Object> updateVehicleListing(VehicleRequest vehicleRequest) {
-        VehicleListing vehicleListing = vehicleListingRepository.findByListingReference(vehicleRequest.getListingReference()).orElse(null);
+        VehicleListing vehicleListing = vehicleListingRepository.findByListingReference(vehicleRequest.getListingReference())
+                .orElse(null);
 
         if(vehicleListing == null){
             return ResponseHandler.generateResponse(
-                    "There is no listing with the given reference : " + vehicleRequest.getListingReference() + " to be updated !",
+                    "There is no vehicle listing with the given reference : " + vehicleRequest.getListingReference() + " to be updated !",
                     HttpStatus.BAD_REQUEST);
         }
 
