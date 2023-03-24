@@ -6,6 +6,6 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 public class PhotoRequest {
-    private String id;
+    private Long id;
     private String imageUrl;
 }
