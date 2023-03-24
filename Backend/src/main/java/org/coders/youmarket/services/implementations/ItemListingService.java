@@ -60,7 +60,7 @@ public class ItemListingService implements ItemListingServiceInterface {
         }
 
         itemListing.setDescription(itemRequest.getDescription());
-        itemListing.setPrice(Float.parseFloat(itemRequest.getPrice()));
+        itemListing.setPrice(itemRequest.getPrice());
         itemListing.setAssets(
                 itemRequest.getAssets().stream()
                         .map(EntityMapping::photoRequestToPhoto)
@@ -70,15 +70,9 @@ public class ItemListingService implements ItemListingServiceInterface {
                 EntityMapping.addressRequestToAddress(itemRequest.getLocation())
         );
         itemListing.setTitle(itemRequest.getTitle());
-        itemListing.setDoorDropOff(
-                Boolean.parseBoolean(itemRequest.getDoorDropOff())
-        );
-        itemListing.setDoorPickup(
-                Boolean.parseBoolean(itemRequest.getDoorPickup())
-        );
-        itemListing.setPublicMeetup(
-                Boolean.parseBoolean(itemRequest.getPublicMeetup())
-        );
+        itemListing.setDoorDropOff(itemRequest.getDoorDropOff());
+        itemListing.setDoorPickup(itemRequest.getDoorPickup());
+        itemListing.setPublicMeetup(itemRequest.getPublicMeetup());
         itemListing.setProperties(
                 EntityMapping.itemPropertiesRequestToItemProperties(itemRequest.getProperties())
         );
