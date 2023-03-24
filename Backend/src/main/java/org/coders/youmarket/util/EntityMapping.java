@@ -4,11 +4,15 @@ import org.coders.youmarket.entities.Address;
 import org.coders.youmarket.entities.AppUser;
 import org.coders.youmarket.entities.Listing;
 import org.coders.youmarket.entities.Photo;
+import org.coders.youmarket.entities.home.HomeRentalListing;
+import org.coders.youmarket.entities.home.HomeRentalProperties;
 import org.coders.youmarket.entities.item.ItemListing;
 import org.coders.youmarket.entities.item.ItemProperties;
 import org.coders.youmarket.entities.vehicle.VehicleListing;
 import org.coders.youmarket.entities.vehicle.VehicleProperties;
 import org.coders.youmarket.services.dtos.listing.ListingRequestResponse;
+import org.coders.youmarket.services.dtos.listing.home.HomeRentalPropertiesRequest;
+import org.coders.youmarket.services.dtos.listing.home.HomeRentalRequest;
 import org.coders.youmarket.services.dtos.listing.item.ItemPropertiesRequest;
 import org.coders.youmarket.services.dtos.listing.item.ItemRequest;
 import org.coders.youmarket.services.dtos.listing.vehicle.VehiclePropertiesRequest;
@@ -35,7 +39,7 @@ public class EntityMapping {
         return modelMapper.map(addressRequest , Address.class);
     }
 
-    public static VehicleRequest vehicleListingToVehicleRequest(Listing vehicleListing){
+    public static VehicleRequest listingToVehicleRequest(Listing vehicleListing){
         return modelMapper.map(vehicleListing, VehicleRequest.class);
     }
     public static VehicleListing vehicleRequestToVehicleListing(VehicleRequest vehicleRequest){
@@ -56,6 +60,20 @@ public class EntityMapping {
     }
     public static ItemProperties itemPropertiesRequestToItemProperties(ItemPropertiesRequest itemPropertiesRequest){
         return modelMapper.map(itemPropertiesRequest, ItemProperties.class);
+    }
+
+    public static HomeRentalRequest listingToHomeRentalRequest(Listing homeListing){
+        return modelMapper.map(homeListing, HomeRentalRequest.class);
+    }
+//    public static HomeRentalRequest homeRentalListingToHomeRentalRequest(HomeRentalListing homeRentalListing){
+//        return modelMapper.map(homeRentalListing, HomeRentalRequest.class);
+//    }
+    public static HomeRentalListing homeRentalRequestToHomeRentalListing(HomeRentalRequest homeRentalRequest){
+        return modelMapper.map(homeRentalRequest, HomeRentalListing.class);
+    }
+    public static HomeRentalProperties homeRentalPropertiesRequestToHomeRentalProperties(
+            HomeRentalPropertiesRequest homeRentalPropertiesRequest){
+        return modelMapper.map(homeRentalPropertiesRequest, HomeRentalProperties.class);
     }
 
     public static Photo photoRequestToPhoto(PhotoRequest photoRequest){
