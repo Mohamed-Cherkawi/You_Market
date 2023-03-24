@@ -27,7 +27,7 @@ public class VehicleListingService implements VehicleListingServiceInterface {
         VehicleListing vehicleListing = EntityMapping.vehicleRequestToVehicleListing(vehicleRequest);
 
         vehicleListing.setListingReference(UUID.randomUUID().toString());
-        vehicleListing.setPurchaseDate(DateTimeParser.getDateFromFormatPattern(
+        vehicleListing.setPurchaseDate(DateTimeParser.getLocalDateFromFormatPattern(
                 vehicleRequest.getPurchaseDate()
         ));
         vehicleListing.setListingType(ListingTypeEnum.VEHICLE);
@@ -57,14 +57,14 @@ public class VehicleListingService implements VehicleListingServiceInterface {
         }
 
         vehicleListing.setDescription(vehicleRequest.getDescription());
-        vehicleListing.setPrice(Float.parseFloat(vehicleRequest.getPrice()));
+        vehicleListing.setPrice(vehicleRequest.getPrice());
         vehicleListing.setAssets(
                 vehicleRequest.getAssets().stream()
                         .map(EntityMapping::photoRequestToPhoto)
                         .collect(Collectors.toSet())
         );
         vehicleListing.setPurchaseDate(
-                DateTimeParser.getDateFromFormatPattern(vehicleRequest.getPurchaseDate())
+                DateTimeParser.getLocalDateFromFormatPattern(vehicleRequest.getPurchaseDate())
         );
         vehicleListing.setProperties(
                 EntityMapping.vehiclePropertiesRequestToVehicleProperties(vehicleRequest.getProperties())
@@ -85,7 +85,7 @@ public class VehicleListingService implements VehicleListingServiceInterface {
 
     }
     private VehicleRequest mapVehicleListingToVehicleRequest(VehicleListing vehicleListing , boolean setUpdatedAt){
-        VehicleRequest vehicleResponse = EntityMapping.vehicleListingToVehicleRequest(vehicleListing);
+        VehicleRequest vehicleResponse = EntityMapping.listingToVehicleRequest(vehicleListing);
 
         if(setUpdatedAt) {
             vehicleResponse.setUpdatedAt(
