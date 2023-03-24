@@ -7,6 +7,7 @@ import org.coders.youmarket.enums.listing.ListingTypeEnum;
 import org.coders.youmarket.repositories.ListingRepository;
 import org.coders.youmarket.services.dtos.listing.ListingRequestResponse;
 import org.coders.youmarket.services.interfaces.ListingServiceInterface;
+import org.coders.youmarket.util.DateTimeParser;
 import org.coders.youmarket.util.EntityMapping;
 import org.coders.youmarket.util.HeaderKeyValueResponse;
 import org.coders.youmarket.util.ResponseHandler;
@@ -97,18 +98,34 @@ public class ListingService implements ListingServiceInterface {
 
     private Set<ListingRequestResponse> mapListingsToOverviewResponse(List<Listing> listings){
         return listings.stream()
-                .map(EntityMapping::listingToListingRequestResponse)
+                .map(listing -> {
+                    ListingRequestResponse listingRequestResponse = EntityMapping.listingToListingRequestResponse(listing);
+
+                    if(listing.getUpdatedAt() != null){
+                        listingRequestResponse.setUpdatedAt(
+                                DateTimeParser.getStringDateOfLocalDateTimeStandardPattern(listing.getUpdatedAt())
+                        );
+                    }
+
+                    return listingRequestResponse;
+                })
                 .collect(Collectors.toSet());
     }
     private ListingRequestResponse mapListingToItsTypeResponse(Listing listing , ListingTypeEnum listingType){
         ListingRequestResponse listingRequestResponse ;
 
         if(listingType.equals(ListingTypeEnum.VEHICLE)){
-            listingRequestResponse = EntityMapping.vehicleListingToVehicleRequest(listing);
+            listingRequestResponse = EntityMapping.listingToVehicleRequest(listing);
         } else if (listingType.equals(ListingTypeEnum.ITEM)) {
             listingRequestResponse = EntityMapping.listingToItemRequest(listing);
         }else {
-            listingRequestResponse = EntityMapping.vehicleListingToVehicleRequest(listing);
+            listingRequestResponse = EntityMapping.listingToHomeRentalRequest(listing);
+        }
+
+        if(listing.getUpdatedAt() != null){
+            listingRequestResponse.setUpdatedAt(
+                    DateTimeParser.getStringDateOfLocalDateTimeStandardPattern(listing.getUpdatedAt())
+            );
         }
 
         return listingRequestResponse;
