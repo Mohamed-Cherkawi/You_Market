@@ -6,7 +6,7 @@ import org.coders.youmarket.enums.listing.ListingConditionEnum;
 
 @Getter @Setter
 public class ItemPropertiesRequest {
-    private String id;
+    private Long id;
     private String category;
     private ListingConditionEnum condition;
     private String brand;

@@ -9,8 +9,8 @@ import org.coders.youmarket.services.dtos.other.AddressRequest;
 public class ItemRequest extends ListingRequestResponse {
     private String title;
     private AddressRequest location;
-    private String publicMeetup;
-    private String doorPickup;
-    private String doorDropOff;
+    private Boolean publicMeetup;
+    private Boolean doorPickup;
+    private Boolean doorDropOff;
     private ItemPropertiesRequest properties;
 }
