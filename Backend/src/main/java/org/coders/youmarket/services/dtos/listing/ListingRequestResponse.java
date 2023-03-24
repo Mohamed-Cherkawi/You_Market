@@ -13,7 +13,7 @@ public class ListingRequestResponse {
     private String listingReference;
     private String ownerReference;
     private Set<PhotoRequest> assets;
-    private String price;
+    private Float price;
     private String description;
     private ListingTypeEnum listingType;
     private String updatedAt;
