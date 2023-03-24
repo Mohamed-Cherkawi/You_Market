@@ -26,7 +26,7 @@ import org.coders.youmarket.enums.home.RentalTypeEnum;
 public class HomeRentalProperties {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "home_rental_properties_seq")
-    @SequenceGenerator(name = "home_rental_properties_seq")
+    @SequenceGenerator(name = "home_rental_properties_seq" , allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
