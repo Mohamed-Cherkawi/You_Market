@@ -18,7 +18,7 @@ public class ProfileController {
     private final UserServiceInterface userService;
 
     @GetMapping("/fetching/single/{userReference}")
-    public ResponseEntity<Object> getUserProfileInfosByItsReferenceApi(@PathVariable("userReference") String userReference){
+    public ResponseEntity<Object> getUserProfileInfosByItsReferenceApi(@PathVariable String userReference){
         return userService.getUserProfileInfosByReference(userReference);
     }
     @PutMapping("/updating")
