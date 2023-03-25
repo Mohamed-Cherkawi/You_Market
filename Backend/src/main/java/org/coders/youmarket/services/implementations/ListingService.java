@@ -32,16 +32,25 @@ public class ListingService implements ListingServiceInterface {
         if(listings.isEmpty()){
             return ResponseHandler.generateResponse(
                     "There Is No Listings To Show",
-                    HttpStatus.NOT_FOUND,
-                    null
+                    HttpStatus.NOT_FOUND
             );
         }
 
-        return ResponseHandler.generateResponse(
-                "Data Fetched Successfully",
-                HttpStatus.OK,
-                mapListingsToOverviewResponse(listings)
-        );
+        return getSuccessfulMessage(listings);
+    }
+
+    @Override
+    public ResponseEntity<Object> getAllListingsByListingType(ListingTypeEnum listingType) {
+        List<Listing> listings = listingRepository.findAllByListingType(listingType);
+
+        if(listings.isEmpty()){
+            return ResponseHandler.generateResponse(
+                    "There is no listings with the given listings type : " + listingType.toString(),
+                    HttpStatus.NOT_FOUND
+            );
+        }
+
+        return getSuccessfulMessage(listings);
     }
 
     @Override
@@ -56,11 +65,7 @@ public class ListingService implements ListingServiceInterface {
             );
         }
 
-        return ResponseHandler.generateResponse(
-                "Data Fetched Successfully",
-                HttpStatus.OK,
-                mapListingsToOverviewResponse(listings)
-        );
+        return getSuccessfulMessage(listings);
     }
 
     @Override
@@ -129,5 +134,13 @@ public class ListingService implements ListingServiceInterface {
         }
 
         return listingRequestResponse;
+    }
+
+    private ResponseEntity<Object> getSuccessfulMessage(List<Listing> listings){
+        return ResponseHandler.generateResponse(
+                "Data Fetched Successfully",
+                HttpStatus.OK,
+                mapListingsToOverviewResponse(listings)
+        );
     }
 }
