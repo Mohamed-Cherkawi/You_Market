@@ -1,0 +1,61 @@
+<img class="wave" src="assets/img/wave.png" alt="waves">
+<div class="container">
+  <div class="img">
+    <img src="assets/svg/bg.svg" alt="image-background">
+  </div>
+  <div class="login-content">
+    <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
+      <img src="assets/svg/avatar.svg" alt="avatar">
+      <h3 class="title">Welcome Back</h3>
+      <span *ngIf="credentialsError" class="text-danger">Bad Credentials</span>
+      <div id="form-content">
+        <div class="input-div one" id="usernameField">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="div">
+            <h5>Username</h5>
+            <input
+              type="text"
+              name="username"
+              class="input"
+              id="username"
+              formControlName="username"
+              matInput
+               required
+              (click)="onInputFocus('usernameField')"
+              (blur)="onInputBlur('usernameField')"
+            />
+          </div>
+        </div>
+        <div class="input-div pass" id="passwordField">
+          <div class="i">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+            <h5>Password</h5>
+            <input
+              type="text"
+              name="password"
+              class="input"
+              id="password"
+              formControlName="password"
+              matInput
+              [type]=" hide ? 'password' : 'text'"
+              required
+              (click)="onInputFocus('passwordField')"
+              (blur)="onInputBlur('passwordField')"
+            />
+          </div>
+        </div>
+        <span id="hide-password" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+              [attr.aria-pressed]="hide">
+              View password
+              <i class="uil uil-eye fs-5 ms-2"></i>
+          </span>
+        <a href="" id="forgot-link">Forgot Password?</a>
+      </div>
+      <button type="submit" class="btn">Log in</button>
+    </form>
+  </div>
+</div>
