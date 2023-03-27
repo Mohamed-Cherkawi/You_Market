@@ -30,8 +30,12 @@
 #form-content{
   margin-top: 3rem
 }
-#forgot-link{
+#register-link{
   margin-top: 1rem;
+  font-size: 0.8rem;
+}
+#register-link u:hover {
+  color: #38d39f
 }
 .img img{
   width: 500px;
@@ -150,9 +154,6 @@ a{
   transition: .3s;
 }
 
-a:hover{
-  color: #38d39f;
-}
 
 .btn{
   display: block;

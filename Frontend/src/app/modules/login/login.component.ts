@@ -90,17 +90,17 @@ export class LoginComponent implements OnInit {
   public onInputBlur(parentElementId: string): void {
     if(parentElementId == "usernameField"){
 
-        if(this.loginForm.value.username.length != 0){
+        if(this.loginForm.value.username){
             return;
         }
     }else {
-      if(this.loginForm.value.password.length != 0){
+      if(this.loginForm.value.password){
         return;
       }
     }
     blur(parentElementId);
 
-    if(this.loginForm.value.password.length == 0 && this.loginForm.value.username.length == 0){
+    if(!this.loginForm.value.password && !this.loginForm.value.username){
         this.credentialsError = false;
     }
   }
