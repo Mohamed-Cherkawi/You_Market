@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="register-content">
+    <form (ngSubmit)="onRegister()" name="registerForm" [formGroup]="registerForm">
+      <span *ngIf="credentialsError" class="text-danger">Fields Must Be Filled Up ! </span>
+      <div id="form-content">
+        <div class="input-div one" id="fullNameField">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="div">
+            <h5>Full Name</h5>
+            <input
+              type="text"
+              name="name"
+              class="input"
+              id="name"
+              formControlName="name"
+              required
+              (click)="onInputFocus('fullNameField')"
+              (blur)="onInputBlur('fullNameField')"
+            />
+          </div>
+        </div>
+        <div class="input-div pass" id="phoneField">
+          <div class="i">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+            <h5>Phone</h5>
+            <input
+              type="text"
+              name="phone"
+              class="input"
+              id="password"
+              formControlName="phone"
+              required
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+              (click)="onInputFocus('phoneField')"
+              (blur)="onInputBlur('phoneField')"
+            />
+          </div>
+        </div>
+        <div class="mt-4" id="addressField">
+          <label class="d-flex" for="locationSelect">
+            <i class="fa fa-map me-3"></i>
+            <h6>Choose Your Address</h6>
+          </label>
+          <div class="">
+            <select
+              id="locationSelect"
+              class="form-select"
+              aria-label="Location Selector Choice"
+              name="location"
+              formControlName="country"
+              required>
+              <option value="">-- Select a country --</option>
+              <option
+                *ngFor="let country of countries"
+                [value]= "country[0]"
+              >{{country[1]}}</option>
+            </select>
+          </div>
+        </div>
+        <span class="d-none" id="hide-password" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+              [attr.aria-pressed]="hide">
+              View password
+              <i class="uil uil-eye fs-5 ms-2"></i>
+          </span>
+      </div>
+      <a href="/login" id="register-link">Already Member ? <u>Go Here</u></a>
+      <button type="button" class="btn mt-5" (click)="triggerNextOrPreviousButton()">{{ nextPrevButt }}</button>
+      <button type="submit" class="btn">Sign up</button>
+    </form>
+  </div>
+  <div class="img">
+    <img src="assets/svg/sign_up_n6im.svg" alt="image-background">
+  </div>
+</div>
+<img class="wave" src="assets/svg/wave.svg" alt="waves">
