@@ -16,12 +16,16 @@ import {MatButtonModule} from "@angular/material/button";
 import {RegisterComponent} from "./modules/register/register.component";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthenticationGuard} from "./guards/authentication.guard";
+import { HeaderComponent } from './layouts/header/header.component';
+import { HomeComponent } from './modules/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
