@@ -1,5 +1,5 @@
 export interface AddressRequest {
-  id: number;
+  id?: number | null;
   title: string;
-  description: string;
+  description?: string | null;
 }
