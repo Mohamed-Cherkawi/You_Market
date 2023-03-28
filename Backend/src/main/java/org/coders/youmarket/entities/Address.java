@@ -23,7 +23,7 @@ public class Address {
     @Column(name = "title", nullable = false, length = 60)
     private String title;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
 }
