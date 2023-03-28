@@ -1,0 +1,30 @@
+#app-header {
+  background-color: #343536;
+  height: 60px;
+}
+.iconHolder , #down-arrow-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.iconHolder {
+  background-color: rgba(96, 92, 92 , 0.7);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+h3 {
+  letter-spacing: 4px;
+}
+.iconHolder:hover {
+    background-color: rgb(96, 92, 92);
+}
+#down-arrow-holder {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: black;
+  bottom: -3px;
+  right: 0;
+}
