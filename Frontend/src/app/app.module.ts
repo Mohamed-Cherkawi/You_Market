@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {MatButtonModule} from "@angular/material/button";
 import {RegisterComponent} from "./modules/register/register.component";
+import {TokenInterceptor} from "./interceptors/token.interceptor";
+import {AuthenticationGuard} from "./guards/authentication.guard";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,12 @@ import {RegisterComponent} from "./modules/register/register.component";
     }),
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+    // Interceptors providers
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    // Guards providers
+    AuthenticationGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
