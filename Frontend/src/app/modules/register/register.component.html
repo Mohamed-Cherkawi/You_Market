@@ -90,13 +90,13 @@
             <div class="div">
               <h5>Password</h5>
               <input
-                type="text"
+                type="password"
                 name="password"
                 class="input"
                 id="password"
                 formControlName="password"
                 matInput
-                [type]=" hide ? 'password' : 'text'"
+                [type]=" hide ? 'text' : 'password'"
                 required
                 (click)="onInputFocus('passwordField')"
                 (blur)="onInputBlur('passwordField',2)"
