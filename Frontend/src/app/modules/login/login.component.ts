@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   public onLogin(){
-    localStorage.removeItem('token');
 
     if (!this.loginForm.valid)
       return;
@@ -65,7 +64,7 @@ export class LoginComponent implements OnInit {
           error:
             (error : HttpErrorResponse) => {
               this.credentialsError = true;
-              console.log(error)
+              console.log(error.error)
             }
         });
 
