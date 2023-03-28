@@ -18,8 +18,6 @@ export class TokenInterceptor implements HttpInterceptor {
     if(!request.url.toString().includes("authenticate")){
       // Get the token from local storage
       const token = localStorage.getItem('token');
-
-      console.log(token)
       let clone = request.clone({headers:request.headers.set("Authorization", `Bearer ${token}`)});
       console.log(clone)
       //let headers=new HttpHeaders().append('Authorization',`Bearer ${token}`)
