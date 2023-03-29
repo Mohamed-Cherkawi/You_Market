@@ -6,5 +6,21 @@
 
 body{
   font-family: 'Poppins', sans-serif;
+  color: white;
   overflow: hidden;
+}
+
+.iconHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(96, 92, 92 , 0.7);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.iconHolder:hover {
+  background-color: rgb(96, 92, 92);
 }
