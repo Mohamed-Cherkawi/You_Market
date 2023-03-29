@@ -1,0 +1,119 @@
+#firstDiv , #secondDiv {
+  background-color: #343536;
+
+}
+
+#firstDiv {
+  height: 100vh;
+  border-right: 1px solid grey;
+}
+
+#firstDiv > div , #LinksCategoriesHolder{
+  border-bottom: 1px solid grey;
+}
+
+#LinksCategoriesHolder::-webkit-scrollbar {
+  width: 8px;
+}
+
+#LinksCategoriesHolder::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#LinksCategoriesHolder::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.71);
+  border-radius: 35px;
+}
+
+#LinksCategoriesHolder::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}
+
+#settingIcon {
+  width: 20px;
+  height: 20px;
+}
+
+#searchIcon {
+  width: 20px;
+  height: 20px;
+}
+
+#searchFieldHolder {
+  background-color: rgb(96, 92, 92);
+  border-radius: 20px;
+}
+
+#searchFieldHolder input:focus {
+  outline: none;
+}
+
+#searchFieldHolder input::placeholder {
+  color: darkgrey;
+}
+
+.iconHolder {
+  width: 42px;
+  height: 42px;
+}
+
+a{
+  display: block;
+  cursor: pointer;
+  margin: 7px 0;
+}
+
+a > div {
+  height: 55px;
+  border-radius: 5px;
+}
+
+a > div:hover {
+  background-color: rgb(96, 92, 92);
+}
+
+#addListingHolder {
+  color: #38d39f;
+  background-color: rgba(56, 211, 159, 0.4);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: 0.3s linear;
+}
+
+#addListingHolder:hover {
+  background-color: rgba(56, 211, 159, 0.3);
+  transform: scale(0.9);
+}
+
+#addListingHolder img {
+  width: 15px;
+  height: 15px;
+}
+
+#categoriesHolder {
+  margin-bottom: 8rem;
+}
+
+img[alt="Mobile Icon"] {
+  width: 20px;
+  height: 20px;
+}
+
+/******************* Listing Section ***********************/
+
+.listingSection {
+  height: auto;
+  max-width: 300px;
+  cursor: pointer;
+}
+
+.listingSection img {
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 575px){
+  #listingsMainContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
