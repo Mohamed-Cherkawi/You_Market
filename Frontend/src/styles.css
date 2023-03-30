@@ -6,8 +6,22 @@
 
 body{
   font-family: 'Poppins', sans-serif;
-  color: white;
-  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #5b5959;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.71);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(50, 190, 143, 0.5);
 }
 
 .iconHolder {
