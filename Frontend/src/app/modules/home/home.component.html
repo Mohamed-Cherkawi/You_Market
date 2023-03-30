@@ -1,58 +1,57 @@
 <app-header></app-header>
-<div class="row g-0 position-relative">
-  <div class="d-none d-sm-block col-sm-5  col-lg-4 col-xl-3 p-2 pe-0" id="firstDiv">
+<div class="row g-0">
+    <div class="d-none d-sm-block col-sm-5  col-lg-4 col-xl-3"></div>
+    <div class="d-none d-sm-block col-sm-5  col-lg-4 col-xl-3 p-2 pe-0 vh-100" id="firstDiv">
       <div class="pe-2">
-      <div class="d-flex justify-content-between align-items-center">
-        <h4>Market store</h4>
-        <div class="p-2 iconHolder">
-          <img src="assets/svg/icons/settings.svg" alt="Settings Icon" id="settingIcon">
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="text-white">Market store</h4>
+          <div class="p-2 iconHolder">
+            <img src="assets/svg/icons/settings.svg" alt="Settings Icon" id="settingIcon">
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center mt-2 mb-3 py-1 px-2" id="searchFieldHolder">
+          <img class="me-2" src="assets/svg/icons/search.svg" alt="Search Icon" id="searchIcon">
+          <input class="w-100 bg-transparent border border-0 text-white" type="text" placeholder="SearchIn You Market">
         </div>
       </div>
 
-      <div class="d-flex align-items-center mt-2 mb-3 py-1 px-2" id="searchFieldHolder">
-        <img class="me-2" src="assets/svg/icons/search.svg" alt="Search Icon" id="searchIcon">
-        <input class="w-100 bg-transparent border border-0 text-white" type="text" placeholder="SearchIn You Market">
-      </div>
-      </div>
-
-    <div class="h-100 overflow-scroll pe-2" id="LinksCategoriesHolder">
+      <div class="h-100 overflow-scroll pe-2" id="LinksCategoriesHolder">
         <a *ngFor="let link of links">
           <div class="d-flex align-items-center">
             <div class="p-2 iconHolder mx-2">
-              <img src="assets/svg/icons/{{ link.svgIconName }}.svg" alt="{{ link.imgAlt }}">
+              <img src="assets/svg/icons/{{ link.svgIconName }}.svg" alt="{{ link.imgAlt }}" class="linksIcons">
             </div>
-            <small>{{ link.linkName }}</small>
+            <small class="text-white">{{ link!.linkName }}</small>
           </div>
         </a>
 
         <div class="d-flex justify-content-center align-items-center py-2 mt-3" id="addListingHolder">
-            <img class="me-2" src="assets/svg/icons/plus.svg" alt="Plus Icon">
-            <small class="text-bold">Create new listing</small>
+          <img class="me-2" src="assets/svg/icons/plus.svg" alt="Plus Icon">
+          <small class="text-bold">Create new listing</small>
         </div>
 
-      <h6 class="my-3">Categories</h6>
+        <h6 class="my-3 text-white">Categories</h6>
 
-      <div id="categoriesHolder">
-        <a *ngFor="let category of categories">
-          <div class="d-flex align-items-center">
-            <div class="p-2 iconHolder mx-2">
-              <img src="assets/svg/icons/categories/{{ category.svgIconName }}.svg" alt="{{ category.imgAlt }}">
-            </div>
-            <small>{{ category.linkName }}</small>
-          </div>
-        </a>
+        <div id="categoriesHolder">
+          <app-category></app-category>
+        </div>
+      </div>
+    </div>
+      <div class="d-sm-none d-flex pt-3" id="mobileIconsHolder">
+          <div class="p-2 mx-2 text-white mobileIcons">Sell</div>
+          <div (click)="OpenCategoriesSheet()" class="p-2 mx-2 text-white mobileIcons">All Categories</div>
+      </div>
+    <div class="col-sm-7 col-lg-8 col-xl-9 p-3 ps-4 min-vh-100" id="secondDiv">
+      <h4 class="text-white">Today's Listings</h4>
+      <div class="row gy-3 mt-3" id="listingsMainContainer">
+        <div *ngFor="let cat of categories" class="d-flex flex-column listingSection col-12 col-lg-6 col-xl-4 me-1">
+          <img src="assets/img/listings/pc-gamer.jpg" alt="Listing Image" width="280" height="280">
+          <span class="mt-2 text-white">1 $</span>
+          <span class="my-2 text-white">Pc Gamer Rayzen Xs200 1050 Ti RTX Black</span>
+          <span class="text-white">Morocco</span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-sm-7 col-lg-8 col-xl-9 p-3 overflow-scroll vh-100" id="secondDiv">
-    <h4>Today's Listings</h4>
-    <div class="row gx-2 gy-3 mt-3" id="listingsMainContainer">
-        <div class="d-flex flex-column listingSection col-12 col-lg-6 col-xl-4 me-1">
-            <img src="assets/img/listings/pc-gamer.jpg" alt="Listing Image" width="280" height="280">
-            <span class="mt-2">1 $</span>
-            <span class="my-2">Pc Gamer Rayzen Xs200 1050 Ti RTX Black</span>
-            <span>Morocco</span>
-        </div>
-    </div>
-  </div>
-</div>
+<app-bottom-sheet></app-bottom-sheet>
