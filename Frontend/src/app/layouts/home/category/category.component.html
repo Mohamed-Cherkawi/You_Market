@@ -1,0 +1,8 @@
+<a *ngFor="let category of categories">
+  <div class="d-flex align-items-center">
+    <div class="p-2 iconHolder mx-2">
+      <img src="assets/svg/icons/categories/{{ category.svgIconName }}.svg" alt="{{ category.imgAlt }}">
+    </div>
+    <small class="text-white">{{ category.linkName }}</small>
+  </div>
+</a>
