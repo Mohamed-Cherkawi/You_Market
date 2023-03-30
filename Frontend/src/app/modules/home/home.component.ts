@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {BottomSheetComponent} from "../../layouts/bottom-sheet/bottom-sheet.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-   links = [
+export class HomeComponent{
+  @ViewChild(BottomSheetComponent) bottomSheetComponent!: BottomSheetComponent ;
+
+  links = [
     { svgIconName: 'store' , linkName : 'Browse all' , imgAlt : 'Store Icon' },
     { svgIconName: 'bell' , linkName : 'Notifications' , imgAlt : 'Notification Icon' },
     { svgIconName: 'inbox' , linkName : 'Inbox' , imgAlt : 'Inbox Icon' },
@@ -25,9 +28,8 @@ export class HomeComponent implements OnInit {
     { svgIconName: 'game-controller' , linkName : 'Toys & Games' , imgAlt : 'Game Controller Icon' },
     { svgIconName: 'run' , linkName : 'Sporting Goods' , imgAlt : 'A Man Running Icon' },
   ];
-  constructor() { }
 
-  ngOnInit(): void {
+  OpenCategoriesSheet(): void {
+    this.bottomSheetComponent.showSheet();
   }
-
 }
