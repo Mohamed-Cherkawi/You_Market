@@ -1,0 +1,39 @@
+#bottomSheetContainer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  display: none;
+}
+
+#bottomSheet {
+  background-color: #343536;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  width: 575px;
+  height: 300px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease-in-out;
+  overflow-y: scroll;
+}
+
+#bottomSheet::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+
+#bottomSheetContainer.active {
+  display: flex;
+}
+
+#bottomSheet.active {
+  transform: translateY(0);
+}
+
+h5 {
+  border-bottom: 1px solid grey;
+}
