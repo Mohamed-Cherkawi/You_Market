@@ -12,12 +12,13 @@ import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
-import {MatButtonModule} from "@angular/material/button";
 import {RegisterComponent} from "./modules/register/register.component";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthenticationGuard} from "./guards/authentication.guard";
 import { HeaderComponent } from './layouts/header/header.component';
 import { HomeComponent } from './modules/home/home.component';
+import { BottomSheetComponent } from './layouts/bottom-sheet/bottom-sheet.component';
+import { CategoryComponent } from './layouts/home/category/category.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { HomeComponent } from './modules/home/home.component';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    BottomSheetComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,6 @@ import { HomeComponent } from './modules/home/home.component';
         useValue: {}
       }
     }),
-    MatButtonModule
   ],
   providers: [
     // Interceptors providers
