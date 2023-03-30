@@ -1,4 +1,6 @@
 #app-header {
+  position: sticky;
+  top: 0;
   background-color: #343536;
   height: 60px;
   border-bottom: 1px solid grey;
