@@ -1,10 +1,10 @@
-#firstDiv , #secondDiv {
+#firstDiv , #secondDiv , #mobileIconsHolder {
   background-color: #343536;
-
 }
 
 #firstDiv {
-  height: 100vh;
+  position: fixed;
+  left: 0;
   border-right: 1px solid grey;
 }
 
@@ -52,11 +52,6 @@
   color: darkgrey;
 }
 
-.iconHolder {
-  width: 42px;
-  height: 42px;
-}
-
 a{
   display: block;
   cursor: pointer;
@@ -70,6 +65,11 @@ a > div {
 
 a > div:hover {
   background-color: rgb(96, 92, 92);
+}
+
+.linksIcons {
+  width: 22px;
+  height: 22px;
 }
 
 #addListingHolder {
@@ -94,10 +94,6 @@ a > div:hover {
   margin-bottom: 8rem;
 }
 
-img[alt="Mobile Icon"] {
-  width: 20px;
-  height: 20px;
-}
 
 /******************* Listing Section ***********************/
 
@@ -111,9 +107,23 @@ img[alt="Mobile Icon"] {
   border-radius: 5px;
 }
 
-@media only screen and (max-width: 575px){
+@media only screen and (max-width: 992px){
   #listingsMainContainer {
     display: flex;
     justify-content: center;
   }
+}
+
+/*************** Mobile elements styling *************/
+
+.mobileIcons{
+  background-color: rgba(96, 92, 92 , 0.7);
+  font-weight: bold;
+  border-radius: 15px;
+  font-size: x-small;
+  cursor: pointer;
+}
+
+.mobileIcons:hover:hover {
+  background-color: rgb(96, 92, 92);
 }
