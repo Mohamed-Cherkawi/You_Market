@@ -19,6 +19,7 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { HomeComponent } from './modules/home/home.component';
 import { BottomSheetComponent } from './layouts/bottom-sheet/bottom-sheet.component';
 import { CategoryComponent } from './layouts/home/category/category.component';
+import { CreateListingComponent } from './modules/create-listing/create-listing.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CategoryComponent } from './layouts/home/category/category.component';
     HeaderComponent,
     HomeComponent,
     BottomSheetComponent,
-    CategoryComponent
+    CategoryComponent,
+    CreateListingComponent
   ],
   imports: [
     BrowserModule,
