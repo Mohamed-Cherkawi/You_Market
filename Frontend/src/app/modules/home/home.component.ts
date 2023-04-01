@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {BottomSheetComponent} from "../../layouts/bottom-sheet/bottom-sheet.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,14 @@ export class HomeComponent{
     { svgIconName: 'run' , linkName : 'Sporting Goods' , imgAlt : 'A Man Running Icon' },
   ];
 
+
+  constructor(private router: Router) {}
+
   OpenCategoriesSheet(): void {
     this.bottomSheetComponent.showSheet();
+  }
+
+  redirectToCreateRoute(): void {
+    this.router.navigate(['/create']);
   }
 }
