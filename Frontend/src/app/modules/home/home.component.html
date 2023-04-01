@@ -26,7 +26,7 @@
           </div>
         </a>
 
-        <div class="d-flex justify-content-center align-items-center py-2 mt-3" id="addListingHolder">
+        <div (click)="redirectToCreateRoute()" class="d-flex justify-content-center align-items-center py-2 mt-3" id="addListingHolder">
           <img class="me-2" src="assets/svg/icons/plus.svg" alt="Plus Icon">
           <small class="text-bold">Create new listing</small>
         </div>
@@ -39,7 +39,7 @@
       </div>
     </div>
       <div class="d-sm-none d-flex pt-3" id="mobileIconsHolder">
-          <div class="p-2 mx-2 text-white mobileIcons">Sell</div>
+          <div (click)="redirectToCreateRoute()" class="p-2 mx-2 text-white mobileIcons">Sell</div>
           <div (click)="OpenCategoriesSheet()" class="p-2 mx-2 text-white mobileIcons">All Categories</div>
       </div>
     <div class="col-sm-7 col-lg-8 col-xl-9 p-3 ps-4 min-vh-100" id="secondDiv">
