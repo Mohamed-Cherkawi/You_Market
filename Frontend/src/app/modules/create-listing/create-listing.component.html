@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 w-100 position-relative" id="container">
+  <div (click)="redirectToHome()" class="iconHolder position-fixed" id="cancelIconHolder">
+    <img src="assets/svg/icons/xmark.svg" alt="X Mark To Dismiss">
+  </div>
+  <div class="p-4 ">
+    <h4 class="fw-bolder pt-5 pt-lg-0">Choose Listing Type</h4>
+    <div class="d-flex flex-column flex-lg-row ">
+      <div *ngFor="let type of listingsTypeProperties ; let i = index" [ngClass]="( i == 1 ) ? 'my-3 my-lg-0 mx-lg-5' : ''" class="flex-column align-items-center p-5 listingTypeHolder">
+        <img src="assets/icons/{{ type.imageName }}.png" alt="{{ type.alt }}">
+        <h5>{{ type.title }}</h5>
+        <p>{{ type.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
