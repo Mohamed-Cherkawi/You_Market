@@ -5,13 +5,19 @@ import {RegisterComponent} from "./modules/register/register.component";
 import {AuthenticationGuard} from "./guards/authentication.guard";
 import {HomeComponent} from "./modules/home/home.component";
 import {CreateListingComponent} from "./modules/create-listing/create-listing.component";
+import {ItemComponent} from "./modules/listings/item/item.component";
+import {CreateContainerComponent} from "./modules/create-container/create-container.component";
 
 const routes: Routes = [
   { path : '', redirectTo: '/login', pathMatch: 'full' },
   { path : 'login' , component : LoginComponent , canActivate : [AuthenticationGuard] },
   { path : 'register' , component : RegisterComponent , canActivate : [AuthenticationGuard] },
   { path : 'home' , component : HomeComponent  },
-  { path : 'create' , component : CreateListingComponent  },
+  { path : 'create' , component : CreateContainerComponent , children : [
+      { path : '' , component :  CreateListingComponent },
+      { path : 'item' , component :  ItemComponent },
+    ]  },
+  { path: '**', redirectTo : '/home'}
 ];
 
 @NgModule({
