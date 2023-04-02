@@ -20,6 +20,8 @@ import { HomeComponent } from './modules/home/home.component';
 import { BottomSheetComponent } from './layouts/bottom-sheet/bottom-sheet.component';
 import { CategoryComponent } from './layouts/home/category/category.component';
 import { CreateListingComponent } from './modules/create-listing/create-listing.component';
+import { ItemComponent } from './modules/listings/item/item.component';
+import { CreateContainerComponent } from './modules/create-container/create-container.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { CreateListingComponent } from './modules/create-listing/create-listing.
     HomeComponent,
     BottomSheetComponent,
     CategoryComponent,
-    CreateListingComponent
+    CreateListingComponent,
+    ItemComponent,
+    CreateContainerComponent
   ],
   imports: [
     BrowserModule,
