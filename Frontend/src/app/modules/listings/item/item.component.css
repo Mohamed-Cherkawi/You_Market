@@ -1,0 +1,121 @@
+* {
+  overflow: hidden;
+}
+
+#inputsSection , #itemPreviewSection {
+  background-color: #343536;
+}
+
+#inputsSection {
+  border-right: 1px solid grey;
+  height: 91.1vh;
+}
+
+#inputsSection h6{
+  color: #93b1b4;
+  margin-bottom: 1px;
+}
+
+#itemPreviewSection {
+  height: 91.1vh;
+}
+
+h4 {
+  color: white;
+}
+
+#inputsHolder {
+  border-top: 1px solid grey;
+  height: 100%;
+}
+
+#inputsHolder::-webkit-scrollbar {
+  width: 8px;
+}
+
+#inputsHolder::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#inputsHolder::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.71);
+  border-radius: 35px;
+}
+
+#inputsHolder::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}
+
+label[for="imageFileInput"] {
+  height: 180px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid grey;
+}
+
+img[alt="Upload File Icon"] {
+  width: 10%;
+  height: 10%;
+}
+
+.material-form-fields {
+  width: 100%;
+}
+
+.material-form-fields mat-label {
+  font-weight: bolder;
+}
+
+/*.material-form-fields mat-error {*/
+/*  color: red ;*/
+/*}*/
+
+.material-form-fields input::placeholder , input , mat-label , mat-select{
+    color: white;
+}
+
+::ng-deep .mat-form-field .mat-form-field-outline {
+  color: grey;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-outline {
+  color: #32be8f;
+}
+
+#mat-selectHolder {
+  width: 100%;
+  outline-color: grey !important;
+}
+
+mat-select {
+  font-size: 15px;
+}
+
+mat-option , mat-option:hover{
+  color: white !important;
+  background-color: #343536 !important;
+}
+
+mat-option:hover {
+  background-color: rgba(52, 53, 54, 0.86) !important;
+}
+
+.categorySectionsHolder {
+  color: white;
+  background-color: #343536;
+}
+
+.categoryTitle {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+::ng-deep .mat-select-value {
+  color: white; /* replace 'red' with your desired color */
+}
+
+@media only screen and (max-width: 1200px){
+  #inputsHolder {
+    overflow: auto;
+  }
+}

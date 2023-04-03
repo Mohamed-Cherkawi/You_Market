@@ -1,0 +1,80 @@
+<app-header></app-header>
+<div class="row g-0">
+  <div class="col-12 col-lg-3 py-2" id="inputsSection">
+    <div class="ps-2">
+      <h6>Market Store</h6>
+      <h4 class="fw-bolder">Item For Sale</h4>
+    </div>
+    <form [formGroup]="itemForm" class="p-2 overflow-scroll" id="inputsHolder">
+      <p class="fst-italic" style="color: #d9d9d9">Photos * 0/10 - You can add  up to 10 photos .</p>
+      <label class="d-block d-flex justify-content-center align-items-center text-white" for="imageFileInput">
+        <div class="d-flex flex-column align-items-center">
+            <img src="assets/svg/icons/upload.svg" alt="Upload File Icon">
+            <h4 class="my-1 fw-bolder">Add Photos</h4>
+            <h6 style="color: #d9d9d9">or drag and drop</h6>
+        </div>
+      </label>
+      <input class="d-none" type="file" name="imageFileName" accept="image/*" multiple id="imageFileInput">
+      <mat-form-field class="material-form-fields mt-3" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="title"
+          maxlength="99">
+        <mat-error *ngIf="itemForm.controls['title'].hasError('required')">
+          Title is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="itemForm.controls['title'].hasError('maxlength')">
+          Maximum length is <strong>99</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="material-form-fields" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="price"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+          maxlength="9">
+        <mat-error *ngIf="itemForm.controls['title'].hasError('required')">
+          Price is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" id="mat-selectHolder">
+        <mat-label>Category</mat-label>
+        <mat-select>
+          <div *ngFor="let category of categories" class="categorySectionsHolder">
+              <span class="p-2 categoryTitle">{{ category.title }}</span>
+              <mat-option *ngFor="let property of category.properties" [value]="property">
+                  {{ property }}
+              </mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Condition</option>
+        <option value="New">New</option>
+        <option value="Used - Like New">Used - Like New</option>
+        <option value="Used - Good">Used - Good</option>
+        <option value="Used - Fair">Used - Fair</option>
+      </select>
+
+      <mat-form-field class="material-form-fields mt-3 mb-5" appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea class="text-white" matInput  formControlName="description" maxlength="255" style="height: 180px; resize: none;"></textarea>
+        <mat-error *ngIf="itemForm.controls['description'].hasError('required')">
+          Description is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="itemForm.controls['description'].hasError('maxlength')">
+          Maximum length is <strong>255</strong>
+        </mat-error>
+      </mat-form-field>
+
+    </form>
+  </div>
+  <div class="col-12 col-lg-9" id="itemPreviewSection"></div>
+</div>
