@@ -1,0 +1,26 @@
+[
+    {
+      "title" : "Home & Garden",
+      "properties" : ["TOOLS" ,"FURNITURE" ,"HOUSEHOLD","GARDEN","APPLIANCES" ]
+    },
+    {
+      "title" : "Entertainment",
+      "properties" : ["VIDEO GAMES" ,"BOOKS, MOVIES & MUSIC"]
+    },
+    {
+      "title" : "Clothing & Accessories",
+      "properties" : ["BAGS & LUGGAGE" ,"WOMEN 'S CLOTHING & SHOES" ,"MEN 'S CLOTHING & SHOES","JEWELRY & ACCESSORIES"]
+    },
+    {
+      "title" : "Family",
+      "properties" : ["HEALTH & BEAUTY" ,"PET SUPPLIES" ,"BABY & KIDS","TOYS & GAMES"]
+    },
+    {
+      "title" : "Hobbies",
+      "properties" : ["BICYCLES" ,"ARTS & CRAFTS" ,"SPORTS & OUTDOORS","AUTO & PARTS","MUSICAL & INSTRUMENTS","ANTIQUES COLLECTIBLES"]
+    },
+    {
+      "title" : "ClassFields",
+      "properties" : ["GARAGE & SALE" ,"MISCELLANEOUS"]
+    }
+]
