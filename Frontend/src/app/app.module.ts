@@ -22,6 +22,7 @@ import { CategoryComponent } from './layouts/home/category/category.component';
 import { CreateListingComponent } from './modules/create-listing/create-listing.component';
 import { ItemComponent } from './modules/listings/item/item.component';
 import { CreateContainerComponent } from './modules/create-container/create-container.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -36,24 +37,25 @@ import { CreateContainerComponent } from './modules/create-container/create-cont
     ItemComponent,
     CreateContainerComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    RouterOutlet,
-    ReactiveFormsModule,
-    MatCardModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatIconModule,
-    JwtModule.forRoot({
-      jwtOptionsProvider: { // this provider is necessary to use the librairy that decoes and manages the JWT
-        provide: JWT_OPTIONS,
-        useValue: {}
-      }
-    }),
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        RouterOutlet,
+        ReactiveFormsModule,
+        MatCardModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatIconModule,
+        JwtModule.forRoot({
+            jwtOptionsProvider: { // this provider is necessary to use the librairy that decoes and manages the JWT
+                provide: JWT_OPTIONS,
+                useValue: {}
+            }
+        }),
+        MatSelectModule,
+    ],
   providers: [
     // Interceptors providers
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
