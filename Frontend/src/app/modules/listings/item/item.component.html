@@ -5,7 +5,7 @@
       <h6>Market Store</h6>
       <h4 class="fw-bolder">Item For Sale</h4>
     </div>
-    <form [formGroup]="itemForm" class="p-2 overflow-scroll" id="inputsHolder">
+    <form [formGroup]="itemForm" class="p-2 overflow-scroll customSrollBar" id="inputsHolder">
       <p class="fst-italic" style="color: #d9d9d9">Photos * 0/10 - You can add  up to 10 photos .</p>
       <label class="d-block d-flex justify-content-center align-items-center text-white" for="imageFileInput">
         <div class="d-flex flex-column align-items-center">
@@ -14,7 +14,7 @@
             <h6 style="color: #d9d9d9">or drag and drop</h6>
         </div>
       </label>
-      <input class="d-none" type="file" name="imageFileName" accept="image/*" multiple id="imageFileInput">
+      <input class="d-none" type="file" formControlName="imageFileName" accept="image/*" multiple id="imageFileInput" (change)="onFileSelected($event)">
       <mat-form-field class="material-form-fields mt-3" appearance="outline">
         <mat-label>Title</mat-label>
         <input
@@ -43,8 +43,8 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" id="mat-selectHolder">
-        <mat-label>Category</mat-label>
+      <mat-form-field appearance="outline" class="mat-selectHolder">
+        <mat-label class="fw-bolder">Category</mat-label>
         <mat-select>
           <div *ngFor="let category of categories" class="categorySectionsHolder">
               <span class="p-2 categoryTitle">{{ category.title }}</span>
@@ -55,15 +55,29 @@
         </mat-select>
       </mat-form-field>
 
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Condition</option>
-        <option value="New">New</option>
-        <option value="Used - Like New">Used - Like New</option>
-        <option value="Used - Good">Used - Good</option>
-        <option value="Used - Fair">Used - Fair</option>
-      </select>
+      <mat-form-field appearance="outline" class="mat-selectHolder">
+        <mat-label class="fw-bolder">Condition</mat-label>
+        <mat-select>
+          <mat-option value="New">New</mat-option>
+          <mat-option value="Used - Like New">Used - Like New</mat-option>
+          <mat-option value="Used - Good">Used - Good</mat-option>
+          <mat-option value="Used - Fair">Used - Fair</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <mat-form-field class="material-form-fields mt-3 mb-5" appearance="outline">
+      <mat-form-field class="material-form-fields" appearance="outline">
+        <mat-label>Brand</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="brand"
+          maxlength="99">
+        <mat-error *ngIf="itemForm.controls['brand'].hasError('maxlength')">
+          Maximum length is <strong>99</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="material-form-fields" appearance="outline">
         <mat-label>Description</mat-label>
         <textarea class="text-white" matInput  formControlName="description" maxlength="255" style="height: 180px; resize: none;"></textarea>
         <mat-error *ngIf="itemForm.controls['description'].hasError('required')">
@@ -74,7 +88,63 @@
         </mat-error>
       </mat-form-field>
 
+      <mat-form-field class="material-form-fields" appearance="outline">
+        <mat-label>SKU</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="sku"
+          maxlength="99">
+        <mat-error *ngIf="itemForm.controls['sku'].hasError('maxlength')">
+          Maximum length is <strong>99</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <h6 class="fw-bolder text-white">Meetup preferences</h6>
+      <p>Buyers will be able to see your preferences on your listing. </p>
+      <div>
+        <div *ngFor="let meetupPreference of meetupPreferences" class="d-flex justify-content-between align-items-center mb-2">
+          <div class="d-flex align-items-center">
+            <img class="meetupIcons" src="assets/svg/icons/{{ meetupPreference.iconName }}.svg" alt="{{ meetupPreference.alt }}">
+            <div class="d-inline-block ms-3">
+              <span class="text-white fw-bolder">{{ meetupPreference.title }}</span>
+              <small class="d-block text-white" style="color: grey;">{{ meetupPreference.resume }}</small>
+            </div>
+          </div>
+          <input type="checkbox" formControlName="{{ meetupPreference.formControlName }}">
+        </div>
+      </div>
     </form>
+      <button (click)="onSubmit()" type="submit">Create Listing</button>
   </div>
-  <div class="col-12 col-lg-9" id="itemPreviewSection"></div>
+  <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center" id="itemPreviewSection">
+    <div class="d-flex flex-column p-3">
+      <h6 class="text-white">Preview</h6>
+      <div class="d-flex flex-row h-100" id="twoSectionsHolder">
+          <div class="d-flex flex-column justify-content-center align-items-center text-center h-100" id="ImagePreviewHolder">
+              <h4>Your Listing Preview</h4>
+              <p class="text-white">As you create your listing, you can<br>preview how it will appear to others<br>on Marketplace</p>
+          </div>
+          <div class="p-2 h-100 customSrollBar" id="listingPropertiesPreviewHolder">
+              <h4>Title</h4>
+              <h5 class="text-white">Price</h5>
+              <small class="text-white">Listed a few seconds ago in Marrakech</small>
+              <h5 class="mt-3 text-white">Details</h5>
+              <small class="mt-2 text-white">Description will appear here</small>
+            <div class="mt-4">
+              <iframe title="Navigate To Address" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108703.12115612609!2d-8.077893478221712!3d31.634602332588734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1680725860697!5m2!1sen!2sma" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="mt-3 pt-2" id="sellerInfoSection">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bolder text-white">Seller information</h5>
+                    <h6 class="text-secondary">Seller details</h6>
+                </div>
+                <div>
+
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
