@@ -2,7 +2,7 @@
   overflow: hidden;
 }
 
-#inputsSection , #itemPreviewSection {
+#inputsSection {
   background-color: #343536;
 }
 
@@ -11,38 +11,43 @@
   height: 91.1vh;
 }
 
+#inputsSection h6 , #inputsHolder p {
+  color: #d9d9d9;
+}
+
 #inputsSection h6{
-  color: #93b1b4;
   margin-bottom: 1px;
 }
 
 #itemPreviewSection {
+  background-color: rgba(0, 0, 0, 0.82);
   height: 91.1vh;
 }
 
-h4 {
+h4 , ::ng-deep .mat-select-value , .material-form-fields input::placeholder ,
+input , mat-label , mat-select{
   color: white;
 }
 
 #inputsHolder {
   border-top: 1px solid grey;
-  height: 100%;
+  height: 82%;
 }
 
-#inputsHolder::-webkit-scrollbar {
+.customSrollBar::-webkit-scrollbar {
   width: 8px;
 }
 
-#inputsHolder::-webkit-scrollbar-track {
+.customSrollBar::-webkit-scrollbar-track {
   background: transparent;
 }
 
-#inputsHolder::-webkit-scrollbar-thumb {
+.customSrollBar::-webkit-scrollbar-thumb {
   background: rgba(128, 128, 128, 0.71);
   border-radius: 35px;
 }
 
-#inputsHolder::-webkit-scrollbar-thumb:hover {
+.customSrollBar::-webkit-scrollbar-thumb:hover {
   background: grey;
 }
 
@@ -66,23 +71,15 @@ img[alt="Upload File Icon"] {
   font-weight: bolder;
 }
 
-/*.material-form-fields mat-error {*/
-/*  color: red ;*/
-/*}*/
-
-.material-form-fields input::placeholder , input , mat-label , mat-select{
-    color: white;
-}
-
 ::ng-deep .mat-form-field .mat-form-field-outline {
   color: grey;
 }
 
-::ng-deep .mat-form-field.mat-focused .mat-form-field-outline {
+::ng-deep .mat-form-field.mat-focused .mat-form-field-outline , ::ng-deep .mat-select-arrow {
   color: #32be8f;
 }
 
-#mat-selectHolder {
+.mat-selectHolder {
   width: 100%;
   outline-color: grey !important;
 }
@@ -100,22 +97,100 @@ mat-option:hover {
   background-color: rgba(52, 53, 54, 0.86) !important;
 }
 
-.categorySectionsHolder {
+.categoryTitle {
+  display: block;
   color: white;
+  font-size: 18px;
+  font-weight: bolder;
   background-color: #343536;
 }
 
-.categoryTitle {
-  font-size: 18px;
-  font-weight: bolder;
+.meetupIcons {
+  width: 30px;
+  height: 30px;
 }
 
-::ng-deep .mat-select-value {
-  color: white; /* replace 'red' with your desired color */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+button[type="submit"]{
+  width: 100%;
+  height: 60px;
+  background: rgb(50,190,143);
+  background: linear-gradient(90deg, rgba(50,190,143,1) 7%, rgba(15,145,101,1) 100%);  color: white;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  border-radius: 7px;
+  transition: 0.5s ease-in-out;
+}
+
+button[type="submit"]:hover{
+  transform: scale(0.93);
+}
+
+#sellerInfoSection {
+  border-top: 2px solid grey;
+}
+
+#itemPreviewSection > div {
+  background-color: #343536;
+  height: 90%;
+  width: 80%;
+  border-radius: 10px;
+}
+
+#ImagePreviewHolder {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  width: 65%;
+  background-color: #444546;
+}
+
+#listingPropertiesPreviewHolder {
+  width: 35%;
+  border: 1px solid #494848;
+  border-left: none;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+iframe {
+  width: 100%;
+  border-radius: 15px;
 }
 
 @media only screen and (max-width: 1200px){
   #inputsHolder {
     overflow: auto;
   }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  #ImagePreviewHolder , #listingPropertiesPreviewHolder{
+    width: 100%;
+  }
 }
+
+@media only screen and (max-width: 992px){
+  #twoSectionsHolder {
+    flex-direction: column !important;
+    height: 1350px !important;
+  }
+  #itemPreviewSection > div {
+    width: 100%;
+  }
+
+  #ImagePreviewHolder , #listingPropertiesPreviewHolder{
+    width: 100% ;
+  }
+
+  #itemPreviewSection {
+    height: auto;
+  }
+}
+
