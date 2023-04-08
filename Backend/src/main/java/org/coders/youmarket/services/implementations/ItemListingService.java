@@ -1,6 +1,8 @@
 package org.coders.youmarket.services.implementations;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.coders.youmarket.entities.Photo;
 import org.coders.youmarket.entities.item.ItemListing;
 import org.coders.youmarket.enums.listing.ListingTypeEnum;
 import org.coders.youmarket.repositories.ItemListingRepository;
@@ -12,24 +14,32 @@ import org.coders.youmarket.util.ResponseHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ItemListingService implements ItemListingServiceInterface {
     private final ItemListingRepository itemListingRepository;
 
     @Override
-    public ResponseEntity<Object> createItemListing(ItemRequest itemRequest) {
+    public ResponseEntity<Object> createItemListing(ItemRequest itemRequest , MultipartFile[] files) {
         ItemListing itemListing = EntityMapping.itemRequestToItemListing(itemRequest);
 
         itemListing.setListingReference(UUID.randomUUID().toString());
         itemListing.setListingType(ListingTypeEnum.ITEM);
 
         try {
+            Set<Photo> photos = processImages(files);
+            log.info("Assets Processed From incoming files : {}",photos);
+            itemListing.setAssets(photos);
             return ResponseHandler.generateResponse(
                     "The Item Listing Has Been Created Successfully",
                     HttpStatus.CREATED,
@@ -41,6 +51,21 @@ public class ItemListingService implements ItemListingServiceInterface {
                     "The Item Listing Hasn't Created , Something went wrong please try again , and make sure all the required attributes are filled up",
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private Set<Photo> processImages(MultipartFile[] files) throws IOException {
+        Set<Photo> photos = new HashSet<>();
+        for (MultipartFile file : files){
+            Photo imageModel = Photo.builder()
+                    .name(file.getOriginalFilename())
+                    .type(file.getContentType())
+                    .picByte(file.getBytes())
+                    .build();
+
+            photos.add(imageModel);
+        }
+
+        return photos;
     }
 
     @Override
