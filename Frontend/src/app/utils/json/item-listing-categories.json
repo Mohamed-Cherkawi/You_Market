@@ -1,26 +1,136 @@
 [
     {
       "title" : "Home & Garden",
-      "properties" : ["TOOLS" ,"FURNITURE" ,"HOUSEHOLD","GARDEN","APPLIANCES" ]
+      "properties" : [
+        {
+          "preview" : "TOOLS",
+          "value" : "TOOLS"
+        } ,
+        {
+          "preview" : "FURNITURE",
+          "value" : "FURNITURE"
+        } ,
+        {
+          "preview": "HOUSEHOLD",
+          "value" : "HOUSEHOLD"
+        },
+        {
+          "preview": "GARDEN",
+          "value" :  "GARDEN"
+        },
+        {
+          "preview": "APPLIANCES",
+          "value" :  "APPLIANCES"
+        }
+      ]
     },
     {
       "title" : "Entertainment",
-      "properties" : ["VIDEO GAMES" ,"BOOKS, MOVIES & MUSIC"]
+      "properties" : [
+        {
+          "preview" : "VIDEO GAMES",
+          "value" : "VIDEO_GAMES"
+        } ,
+        {
+          "preview" : "BOOKS, MOVIES & MUSIC",
+          "value" :  "BOOKS_MOVIES_MUSIC"
+        }
+      ]
     },
     {
       "title" : "Clothing & Accessories",
-      "properties" : ["BAGS & LUGGAGE" ,"WOMEN 'S CLOTHING & SHOES" ,"MEN 'S CLOTHING & SHOES","JEWELRY & ACCESSORIES"]
+      "properties" : [
+        {
+          "preview" : "BAGS & LUGGAGE",
+          "value" : "BAGS_LUGGAGE"
+        } ,
+        {
+          "preview" : "WOMEN 'S CLOTHING & SHOES",
+          "value" : "WOMENCLOTHING_SHOES"
+        } ,
+        {
+          "preview" : "MEN 'S CLOTHING & SHOES",
+          "value" :  "MENCLOTHING_SHOES"
+        },
+        {
+          "preview" : "JEWELRY & ACCESSORIES",
+          "value" :  "JEWELRY_ACCESSORIES"
+        }
+      ]
     },
     {
       "title" : "Family",
-      "properties" : ["HEALTH & BEAUTY" ,"PET SUPPLIES" ,"BABY & KIDS","TOYS & GAMES"]
+      "properties" : [
+        {
+          "preview" : "HEALTH & BEAUTY",
+          "value" : "HEALTH_BEAUTY"
+        } ,
+        {
+          "preview" : "PET SUPPLIES",
+          "value" :  "PETSUPPLIES"
+        } ,
+        {
+          "preview" : "BABY & KIDS",
+          "value" :  "BABY_KIDS"
+        },
+        {
+          "preview" : "TOYS & GAMES",
+          "value" :  "TOYS_GAMES"
+        }
+      ]
+    },
+    {
+      "title" : "Electronics",
+      "properties" : [
+        {
+          "preview" : "HEALTH & BEAUTY",
+          "value" : "ELECTRONICS & COMPUTERS"
+        } ,
+        {
+          "preview" : "MOBILE & PHONES",
+          "value" :  "MOBILE_PHONES"
+        }
+      ]
     },
     {
       "title" : "Hobbies",
-      "properties" : ["BICYCLES" ,"ARTS & CRAFTS" ,"SPORTS & OUTDOORS","AUTO & PARTS","MUSICAL & INSTRUMENTS","ANTIQUES COLLECTIBLES"]
+      "properties" : [
+        {
+          "preview" : "BICYCLES",
+          "value" : "BICYCLES"
+        } ,
+        {
+          "preview" : "ARTS & CRAFTS",
+          "value" :  "ARTS_CRAFTS"
+        } ,
+        {
+          "preview" : "SPORTS & OUTDOORS",
+          "value" :  "SPORTS_OUTDOORS"
+        },
+        {
+          "preview" : "AUTO & PARTS",
+          "value" :  "AUTO_PARTS"
+        },
+        {
+          "preview" : "MUSICAL & INSTRUMENTS",
+          "value" :  "MUSICAL_INSTRUMENTS"
+        },
+        {
+          "preview" : "ANTIQUES COLLECTIBLES",
+          "value" :  "ANTIQUES_COLLECTIBLES"
+        }
+      ]
     },
     {
       "title" : "ClassFields",
-      "properties" : ["GARAGE & SALE" ,"MISCELLANEOUS"]
+      "properties" : [
+        {
+          "preview" : "GARAGE & SALE",
+          "value" : "GARAGE_SALE"
+        } ,
+        {
+          "preview" : "MISCELLANEOUS",
+          "value" :  "MISCELLANEOUS"
+        }]
     }
 ]
