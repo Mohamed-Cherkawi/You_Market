@@ -55,7 +55,6 @@ label[for="imageFileInput"] {
   height: 180px;
   cursor: pointer;
   border-radius: 3px;
-  border: 1px solid grey;
 }
 
 img[alt="Upload File Icon"] {
@@ -162,6 +161,29 @@ button[type="submit"]:hover{
 iframe {
   width: 100%;
   border-radius: 15px;
+}
+
+#listingTitle {
+  font-size: 1.5rem;
+}
+
+#x-markHolder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #555555;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  z-index: 2;
+}
+#x-markHolder > img {
+  width: 80%;
+  height: 80%;
 }
 
 @media only screen and (max-width: 1200px){
