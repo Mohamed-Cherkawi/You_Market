@@ -7,5 +7,7 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class PhotoRequest {
     private Long id;
-    private String imageUrl;
+    private String name;
+    private String type;
+    private byte[] picByte;
 }
