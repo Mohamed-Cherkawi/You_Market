@@ -23,6 +23,9 @@ import { CreateListingComponent } from './modules/create-listing/create-listing.
 import { ItemComponent } from './modules/listings/item/item.component';
 import { CreateContainerComponent } from './modules/create-container/create-container.component';
 import {MatSelectModule} from "@angular/material/select";
+import {MatGridListModule} from '@angular/material/grid-list';
+import { DragDirective } from './drag.directive';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import {MatSelectModule} from "@angular/material/select";
     CategoryComponent,
     CreateListingComponent,
     ItemComponent,
-    CreateContainerComponent
+    CreateContainerComponent,
+    DragDirective
   ],
     imports: [
         BrowserModule,
@@ -48,6 +52,7 @@ import {MatSelectModule} from "@angular/material/select";
         BrowserAnimationsModule,
         MatInputModule,
         MatIconModule,
+        MatGridListModule,
         JwtModule.forRoot({
             jwtOptionsProvider: { // this provider is necessary to use the librairy that decoes and manages the JWT
                 provide: JWT_OPTIONS,
