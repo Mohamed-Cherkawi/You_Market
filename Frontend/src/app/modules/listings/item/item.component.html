@@ -5,23 +5,42 @@
       <h6>Market Store</h6>
       <h4 class="fw-bolder">Item For Sale</h4>
     </div>
-    <form [formGroup]="itemForm" class="p-2 overflow-scroll customSrollBar" id="inputsHolder">
+    <form [formGroup]="itemForm" class="p-2 overflow-scroll customSrollBar" #ItemListingForm id="inputsHolder">
       <p class="fst-italic" style="color: #d9d9d9">Photos * 0/10 - You can add  up to 10 photos .</p>
-      <label class="d-block d-flex justify-content-center align-items-center text-white" for="imageFileInput">
+      <label class="d-block d-flex justify-content-center align-items-center text-white"
+             for="imageFileInput"
+             fileDrag
+             (fileEventEmitter)="fileDropped($event)">
         <div class="d-flex flex-column align-items-center">
             <img src="assets/svg/icons/upload.svg" alt="Upload File Icon">
             <h4 class="my-1 fw-bolder">Add Photos</h4>
             <h6 style="color: #d9d9d9">or drag and drop</h6>
         </div>
       </label>
-      <input class="d-none" type="file" formControlName="imageFileName" accept="image/*" multiple id="imageFileInput" (change)="onFileSelected($event)">
+      <input class="d-none" type="file"
+             formControlName="imageFileName"
+             accept="image/*"
+             multiple id="imageFileInput"
+             (change)="onFileSelected($event)">
+
+      <div *ngIf="filesArrayHolder.length != 0" class="mt-3 mb-3 ">
+        <mat-grid-list cols="3" rowHeight="1:1">
+          <mat-grid-tile *ngFor="let file of filesArrayHolder; let i = index;">
+            <span id="x-markHolder" (click)="removeImage(i)">
+              <img src="assets/svg/icons/xmark.svg" alt="x-mark Icon">
+            </span>
+            <img [src]="file.url" width="120" height="120" alt="listing image">
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
       <mat-form-field class="material-form-fields mt-3" appearance="outline">
         <mat-label>Title</mat-label>
         <input
           type="text"
           matInput
           formControlName="title"
-          maxlength="99">
+          maxlength="99"
+          >
         <mat-error *ngIf="itemForm.controls['title'].hasError('required')">
           Title is <strong>required</strong>
         </mat-error>
@@ -48,8 +67,8 @@
         <mat-select>
           <div *ngFor="let category of categories" class="categorySectionsHolder">
               <span class="p-2 categoryTitle">{{ category.title }}</span>
-              <mat-option *ngFor="let property of category.properties" [value]="property">
-                  {{ property }}
+              <mat-option *ngFor="let property of category.properties" [value]="property.value">
+                  {{ property.preview }}
               </mat-option>
           </div>
         </mat-select>
@@ -58,10 +77,9 @@
       <mat-form-field appearance="outline" class="mat-selectHolder">
         <mat-label class="fw-bolder">Condition</mat-label>
         <mat-select>
-          <mat-option value="New">New</mat-option>
-          <mat-option value="Used - Like New">Used - Like New</mat-option>
-          <mat-option value="Used - Good">Used - Good</mat-option>
-          <mat-option value="Used - Fair">Used - Fair</mat-option>
+          <mat-option *ngFor="let condition of listingConditions" value="{{ condition.value }}">
+            {{ condition.preview }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -115,29 +133,35 @@
         </div>
       </div>
     </form>
-      <button (click)="onSubmit()" type="submit">Create Listing</button>
+      <button (click)="onSubmit()" type="submit">Create Item</button>
   </div>
   <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center" id="itemPreviewSection">
     <div class="d-flex flex-column p-3">
       <h6 class="text-white">Preview</h6>
       <div class="d-flex flex-row h-100" id="twoSectionsHolder">
           <div class="d-flex flex-column justify-content-center align-items-center text-center h-100" id="ImagePreviewHolder">
-              <h4>Your Listing Preview</h4>
+              <h4>Your ListingModel Preview</h4>
               <p class="text-white">As you create your listing, you can<br>preview how it will appear to others<br>on Marketplace</p>
           </div>
           <div class="p-2 h-100 customSrollBar" id="listingPropertiesPreviewHolder">
-              <h4>Title</h4>
-              <h5 class="text-white">Price</h5>
+              <span class="d-block text-white fw-bolder text-break" id="listingTitle">
+                {{(itemForm.get('title')?.value) ? itemForm.get('title')?.value : 'Title'}}
+              </span>
+            <span class="d-block text-white fw-bold">
+                {{(itemForm.get('price')?.value) ? itemForm.get('price')?.value + ' $' : 'Price'}}
+              </span>
               <small class="text-white">Listed a few seconds ago in Marrakech</small>
               <h5 class="mt-3 text-white">Details</h5>
-              <small class="mt-2 text-white">Description will appear here</small>
+              <small class="mt-2 text-white text-break">
+                {{(itemForm.get('description')?.value) ? itemForm.get('description')?.value : 'Description will appear here'}}
+              </small>
             <div class="mt-4">
               <iframe title="Navigate To Address" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108703.12115612609!2d-8.077893478221712!3d31.634602332588734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1680725860697!5m2!1sen!2sma" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="mt-3 pt-2" id="sellerInfoSection">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="fw-bolder text-white">Seller information</h5>
-                    <h6 class="text-secondary">Seller details</h6>
+                <div class="d-flex justify-content-between">
+                    <h6 class="fw-bolder text-white">Seller information</h6>
+                    <small class="text-secondary fw-bold">Seller details</small>
                 </div>
                 <div>
 
@@ -148,3 +172,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  function submitForm(){
+    document.getElementById('inputsHolder').submit();
+  }
+</script>
