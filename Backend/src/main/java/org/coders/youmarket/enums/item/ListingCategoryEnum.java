@@ -1,6 +1,6 @@
 package org.coders.youmarket.enums.item;
 
-public enum ListingCategoryEnum {;
+public class ListingCategoryEnum {
       public enum Home_Garden {
         TOOLS,
         FURNITURE,
