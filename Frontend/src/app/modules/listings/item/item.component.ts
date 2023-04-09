@@ -42,11 +42,10 @@ export class ItemComponent implements OnInit{
     this.itemForm = this.formBuilder.group({
         title: ['', [Validators.required , Validators.maxLength(99)]],
         price: ['', [Validators.required]] ,
-        imageFileName: [[] , [Validators.required]],
         category: ['' , [Validators.required]],
         condition: ['' , [Validators.required]],
         brand: ['' , [Validators.maxLength(99)]],
-        description: ['' , [Validators.required , Validators.maxLength(255)]],
+        description: ['' , [Validators.maxLength(255)]],
         sku: ['' , [Validators.maxLength(99)]],
         isPublicMeetup: [false],
         isDoorPickup: [false],
@@ -57,13 +56,12 @@ export class ItemComponent implements OnInit{
   }
 
   onSubmit() {
-    //this.ItemListingForm.nativeElement.submit();
+    console.log(this.filesArrayHolder);
+    console.log(this.itemForm.value)
 
-    if(!this.itemForm.valid){
-      console.log('ooops');
+    if(!this.itemForm.valid || this.filesArrayHolder.length == 0){
+      // Swal.fire('Any fool can use a computer').then(r => console.log(r));
       return;
-    }else {
-      console.log('fine')
     }
 
     this.itemListingService.createItemListing(
@@ -163,7 +161,6 @@ export class ItemComponent implements OnInit{
   }
 
   public incrementOrDecrementFilesArrayIndex(willIncrement: boolean): void {
-    console.log('first value',this.currentActiveFilesArrayIndex);
 
     if(willIncrement){
       if(this.currentActiveFilesArrayIndex == this.filesArrayHolder.length - 1){
@@ -179,6 +176,5 @@ export class ItemComponent implements OnInit{
         this.currentActiveFilesArrayIndex--;
       }
     }
-      console.log(this.currentActiveFilesArrayIndex);
   }
 }
