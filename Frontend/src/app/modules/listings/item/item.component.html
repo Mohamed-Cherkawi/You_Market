@@ -56,7 +56,7 @@
           formControlName="price"
           oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
           maxlength="9">
-        <mat-error *ngIf="itemForm.controls['title'].hasError('required')">
+        <mat-error *ngIf="itemForm.controls['price'].hasError('required')">
           Price is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -135,18 +135,23 @@
     <div class="d-flex flex-column p-3">
       <h6 class="text-white">Preview</h6>
       <div class="d-flex flex-row h-100" id="twoSectionsHolder">
-          <div class="d-flex flex-column justify-content-center align-items-center text-center h-100" id="ImagePreviewHolder">
+          <div class="d-flex flex-column justify-content-center align-items-center text-center h-100 position-relative" id="ImagePreviewHolder">
             <div *ngIf="!filesArrayHolder.length">
               <h4>Your Listing Preview</h4>
               <p class="text-white">As you create your listing, you can<br>preview how it will appear to others<br>on Marketplace</p>
             </div>
             <div *ngIf="filesArrayHolder.length"
                  id="imagePreviewBack"
-                 [style]="getBackgroundImageStyle()"
-                 class="w-100 h-100 position-relative">
-                  <span *ngIf="filesArrayHolder.length > 1" class="arrows-holder" (click)="incrementOrDecrementFilesArrayIndex(false)"><img src="assets/svg/icons/arrow-left.svg" alt="Left Arrow"></span>
-                  <span *ngIf="filesArrayHolder.length > 1" class="arrows-holder" (click)="incrementOrDecrementFilesArrayIndex(true)"><img src="assets/svg/icons/arrow-right.svg" alt="Right Arrow"></span>
-                  <img class="h-100 w-100" [src]="filesArrayHolder[currentActiveFilesArrayIndex].url" alt="Listing Image">
+                 style="background-image: {{ getBackgroundImageStyle() }}"
+                 class="w-100 h-100">
+            </div>
+            <div *ngIf="filesArrayHolder.length" class="w-100 position-absolute" id="ImagePreviewFront" style="background-image: {{ getBackgroundImageStyle() }}">
+              <span *ngIf="filesArrayHolder.length > 1" class="arrows-holder" (click)="incrementOrDecrementFilesArrayIndex(false)">
+                      <img src="assets/svg/icons/arrow-left.svg" alt="Left Arrow">
+              </span>
+              <span *ngIf="filesArrayHolder.length > 1" class="arrows-holder" (click)="incrementOrDecrementFilesArrayIndex(true)">
+                      <img src="assets/svg/icons/arrow-right.svg" alt="Right Arrow">
+              </span>
             </div>
           </div>
           <div class="p-2 h-100 customSrollBar" id="listingPropertiesPreviewHolder">

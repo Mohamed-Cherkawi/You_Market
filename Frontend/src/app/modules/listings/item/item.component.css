@@ -187,13 +187,18 @@ iframe {
 }
 
 #imagePreviewBack {
-  /*filter: blur(12px);*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: blur(12px);
+  background-size: cover;
 }
 
 #ImagePreviewFront {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 80%;
 }
 
 .arrows-holder {
@@ -220,6 +225,11 @@ iframe {
 
 .arrows-holder:nth-child(2){
   right: 2%;
+}
+
+.sweetErrorCustomBut{
+  width: 50%;
+  background: #32be8f;
 }
 
 @media only screen and (max-width: 1200px){
