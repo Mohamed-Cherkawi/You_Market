@@ -2,7 +2,7 @@ import * as categoriesJsonData from '../../../utils/json/item-listing-categories
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ItemListingCategory} from "../../../models/listings/item-listing-category.model";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeStyle} from "@angular/platform-browser";
 import {FileHandle} from "../../../models/other/file-handle.model";
 import {ItemListing} from "../../../models/listings/item/item-listing.model";
 import {ListingType} from "../../../enums/listing-type.enum";
@@ -31,6 +31,7 @@ export class ItemComponent implements OnInit{
   itemForm! : FormGroup;
   categories!: ItemListingCategory[];
   filesArrayHolder: FileHandle[] = [];
+  currentActiveFilesArrayIndex: number = 0;
 
   constructor(private formBuilder: FormBuilder ,
               private itemListingService: ItemListingService,
@@ -135,7 +136,11 @@ export class ItemComponent implements OnInit{
           });
       }
 
-    console.log(this.filesArrayHolder);
+    console.log(this.filesArrayHolder[0].url.toString());
+  }
+
+  getBackgroundImageStyle(): SafeStyle {
+    return { 'background-image': this.sanitizer.bypassSecurityTrustStyle(`url(${this.filesArrayHolder[0].url})`) };
   }
 
   private getCategoriesDataFromJsonObject():void {
@@ -155,5 +160,25 @@ export class ItemComponent implements OnInit{
     for(let file of files){
       this.filesArrayHolder.push(file);
     }
+  }
+
+  public incrementOrDecrementFilesArrayIndex(willIncrement: boolean): void {
+    console.log('first value',this.currentActiveFilesArrayIndex);
+
+    if(willIncrement){
+      if(this.currentActiveFilesArrayIndex == this.filesArrayHolder.length - 1){
+        this.currentActiveFilesArrayIndex = 0;
+      } else {
+        this.currentActiveFilesArrayIndex++;
+      }
+
+    }else {
+      if(this.currentActiveFilesArrayIndex == 0 ){
+        this.currentActiveFilesArrayIndex = this.filesArrayHolder.length - 1;
+      } else {
+        this.currentActiveFilesArrayIndex--;
+      }
+    }
+      console.log(this.currentActiveFilesArrayIndex);
   }
 }
