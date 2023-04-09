@@ -7,6 +7,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ResponseEntity} from "../../utils/response-entity.model";
 import {AuthenticationResponse} from "../../models/auth/authentication-response.model";
+import {AuthenticationCommonService} from "../../services/authentication-common.service";
 
 declare const focus: Function;
 declare const blur: Function;
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              private commonAuthService: AuthenticationCommonService) {
   }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid)
       return;
 
-    this.handleFormButton();
+    this.commonAuthService.handleFormButton();
 
 
     this.authenticationRequest = {
@@ -56,10 +58,9 @@ export class LoginComponent implements OnInit {
               this.credentialsError = false;
               console.log(response);
 
-              const token = response.data.token;
-              localStorage.setItem('token',token);
+              this.commonAuthService.handleUserToken(response.data.token);
 
-              this.redirectToHome();
+              this.commonAuthService.redirectToHome();
             },
           error:
             (error : HttpErrorResponse) => {
@@ -68,19 +69,6 @@ export class LoginComponent implements OnInit {
             }
         });
 
-  }
-  private redirectToHome(): void{
-      this.router.navigate(['/home']);
-  }
-  private handleFormButton(): void {
-    const button = document.querySelector("button");
-    button!.disabled = true;
-    button!.style.opacity = "0.5";
-
-    setTimeout(function() {
-      button!.disabled = false;
-      button!.style.opacity = "1";
-    }, 1000);
   }
 
   public onInputFocus(parentElementId: string): void {

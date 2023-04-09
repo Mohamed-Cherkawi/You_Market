@@ -3,11 +3,11 @@ import * as countriesDataJson from '../../utils/json/countries-apis.json';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RegisterRequest} from "../../models/auth/register-request.model";
-import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication.service";
 import {ResponseEntity} from "../../utils/response-entity.model";
 import {AuthenticationResponse} from "../../models/auth/authentication-response.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import {AuthenticationCommonService} from "../../services/authentication-common.service";
 
 declare const focus: Function;
 declare const blur: Function;
@@ -27,8 +27,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthenticationService) { }
+    private authService: AuthenticationService,
+    private commonAuthService: AuthenticationCommonService) { }
 
   ngOnInit(): void {
     this.getCountriesDataFromJsonObject();
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
         return;
     }
 
-    this.handleFormButton();
+    this.commonAuthService.handleFormButton();
 
     this.registerRequest = {
       name : this.registerForm.value.name,
@@ -68,10 +68,9 @@ export class RegisterComponent implements OnInit {
           (response: ResponseEntity<AuthenticationResponse>) => {
             console.log(response)
 
-            const token = response.data.token;
-            localStorage.setItem('token',token);
+            this.commonAuthService.handleUserToken(response.data.token);
 
-            this.redirectToHome();
+            this.commonAuthService.redirectToHome();
           },
         error:
         (error : HttpErrorResponse) => {
@@ -79,9 +78,6 @@ export class RegisterComponent implements OnInit {
             console.log(error.error);
         }
       });
-  }
-  private redirectToHome(): void{
-    this.router.navigate(['/home']);
   }
   public onInputFocus(parentElementId: string): void {
     focus(parentElementId);
@@ -94,16 +90,6 @@ export class RegisterComponent implements OnInit {
       case 2 :
         this.onBlurredSecondForm(parentElementId);
     }
-  }
-  private handleFormButton(): void {
-    const button = document.querySelector("button");
-    button!.disabled = true;
-    button!.style.opacity = "0.5";
-
-    setTimeout(function() {
-      button!.disabled = false;
-      button!.style.opacity = "1";
-    }, 1000);
   }
   public triggerNextOrPreviousButton(): void{
     const form1 = document.getElementById('form-1');
