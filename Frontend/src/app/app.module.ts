@@ -53,13 +53,13 @@ import { DragDirective } from './drag.directive';
         MatInputModule,
         MatIconModule,
         MatGridListModule,
-        JwtModule.forRoot({
+        MatSelectModule,
+      JwtModule.forRoot({
             jwtOptionsProvider: { // this provider is necessary to use the librairy that decoes and manages the JWT
                 provide: JWT_OPTIONS,
                 useValue: {}
             }
         }),
-        MatSelectModule,
     ],
   providers: [
     // Interceptors providers
