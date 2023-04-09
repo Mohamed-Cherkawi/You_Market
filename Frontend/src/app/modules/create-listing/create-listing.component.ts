@@ -8,9 +8,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class CreateListingComponent {
   listingsTypeProperties = [
-    { title : 'Item for sale' , description : 'Create a single listing<br>for one or more items to sell'  , imageName: 'open-box' , alt : 'Items Image' , redirectTo: 'item'},
-    { title : 'Vehicle for sale' , description : 'Sell a car , truck or <br> other type of vehicle' , imageName: 'car' , alt : 'Car Image' , redirectTo: 'vehicle'},
-    { title : 'Home for Rent' , description : 'List a house or apartment<br>for rent' , imageName: 'home' , alt : 'House Image' , redirectTo: 'home'},
+    { title : 'Item for sale' , description : 'Create a single listing for one or more items to sell'  , imageName: 'open-box' , alt : 'Items Image' , redirectTo: 'item'},
+    { title : 'Vehicle for sale' , description : 'Sell a car , truck or other type of vehicle' , imageName: 'car' , alt : 'Car Image' , redirectTo: 'vehicle'},
+    { title : 'Home for Rent' , description : 'List a house or apartment for rent' , imageName: 'home' , alt : 'House Image' , redirectTo: 'home'},
   ];
 
   constructor(private router: Router , private activatedRoute: ActivatedRoute) { }
