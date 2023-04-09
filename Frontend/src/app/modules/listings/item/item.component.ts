@@ -2,13 +2,16 @@ import * as categoriesJsonData from '../../../utils/json/item-listing-categories
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ItemListingCategory} from "../../../models/listings/item-listing-category.model";
-import {DomSanitizer, SafeStyle} from "@angular/platform-browser";
+import {DomSanitizer} from "@angular/platform-browser";
 import {FileHandle} from "../../../models/other/file-handle.model";
 import {ItemListing} from "../../../models/listings/item/item-listing.model";
 import {ListingType} from "../../../enums/listing-type.enum";
 import {ItemListingService} from "../../../services/item-listing.service";
 import {ResponseEntity} from "../../../utils/response-entity.model";
 import {HttpErrorResponse} from "@angular/common/http";
+import Swal from 'sweetalert2';
+import {AuthenticationCommonService} from "../../../services/authentication-common.service";
+
 
 @Component({
   selector: 'app-item',
@@ -35,7 +38,8 @@ export class ItemComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder ,
               private itemListingService: ItemListingService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private commonAuthService: AuthenticationCommonService) {
   }
 
   ngOnInit(): void {
@@ -60,9 +64,17 @@ export class ItemComponent implements OnInit{
     console.log(this.itemForm.value)
 
     if(!this.itemForm.valid || this.filesArrayHolder.length == 0){
-      // Swal.fire('Any fool can use a computer').then(r => console.log(r));
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        confirmButtonColor: 'red',
+        confirmButtonText: 'yes , i will',
+        html: "Please make sure that you filled up all <b style='color: red'>required</b> fields , and that you've uploaded at least one image",
+      });
       return;
     }
+
+    this.commonAuthService.handleFormButton();
 
     this.itemListingService.createItemListing(
       this.prepareFormData(
@@ -72,7 +84,16 @@ export class ItemComponent implements OnInit{
         {
           next:
             (response: ResponseEntity<ItemListing>) => {
+              Swal.fire({
+                icon: 'success',
+                title: 'Your Item listing has been saved successfully',
+                showConfirmButton: false,
+                timer: 1700
+              })
               console.log(response);
+              setTimeout(() => {
+                this.commonAuthService.redirectToHome();
+              }, 1700);
             },
           error:
             (error : HttpErrorResponse) => {
@@ -130,15 +151,16 @@ export class ItemComponent implements OnInit{
             file: file,
             url: this.sanitizer.bypassSecurityTrustUrl(
               window.URL.createObjectURL(file)
-            )
+            ),
+            unsafeUrl: window.URL.createObjectURL(file)
           });
       }
 
     console.log(this.filesArrayHolder[0].url.toString());
   }
 
-  getBackgroundImageStyle(): SafeStyle {
-    return { 'background-image': this.sanitizer.bypassSecurityTrustStyle(`url(${this.filesArrayHolder[0].url})`) };
+  getBackgroundImageStyle(): string {
+    return `url(${this.filesArrayHolder[this.currentActiveFilesArrayIndex].unsafeUrl})`;
   }
 
   private getCategoriesDataFromJsonObject():void {
