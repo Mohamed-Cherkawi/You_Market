@@ -186,6 +186,42 @@ iframe {
   height: 80%;
 }
 
+#imagePreviewBack {
+  /*filter: blur(12px);*/
+}
+
+#ImagePreviewFront {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.arrows-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: rgba(96, 92, 92 , 0.7);
+}
+
+.arrows-holder > img {
+  width: 50%;
+  height: 50%;
+}
+
+.arrows-holder:nth-child(1){
+  left: 2%;
+}
+
+.arrows-holder:nth-child(2){
+  right: 2%;
+}
+
 @media only screen and (max-width: 1200px){
   #inputsHolder {
     overflow: auto;
@@ -215,4 +251,3 @@ iframe {
     height: auto;
   }
 }
-
