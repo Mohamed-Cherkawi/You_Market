@@ -41,7 +41,8 @@ export class DragDirective {
         file: file,
         url: this.sanitizer.bypassSecurityTrustUrl(
           window.URL.createObjectURL(file)
-        )
+        ),
+        unsafeUrl: window.URL.createObjectURL(file)
       });
     }
 
