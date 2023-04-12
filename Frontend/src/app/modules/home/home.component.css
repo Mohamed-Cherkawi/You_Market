@@ -67,11 +67,18 @@ a > div:hover {
   background-color: rgb(96, 92, 92);
 }
 
+.linkActive {
+  background-color: rgb(96, 92, 92);
+}
+
 .linksIcons {
   width: 22px;
   height: 22px;
 }
 
+.iconBackground {
+  background-color: #32be8f;
+}
 #addListingHolder {
   color: #38d39f;
   background-color: rgba(56, 211, 159, 0.4);
