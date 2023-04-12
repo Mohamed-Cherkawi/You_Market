@@ -25,6 +25,7 @@ import { CreateContainerComponent } from './modules/create-container/create-cont
 import {MatSelectModule} from "@angular/material/select";
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
+import { SellingComponent } from './modules/selling/selling.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { DragDirective } from './drag.directive';
     CreateListingComponent,
     ItemComponent,
     CreateContainerComponent,
-    DragDirective
+    DragDirective,
+    SellingComponent
   ],
     imports: [
         BrowserModule,
