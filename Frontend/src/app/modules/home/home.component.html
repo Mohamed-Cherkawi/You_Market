@@ -18,8 +18,8 @@
 
       <div class="h-100 overflow-scroll pe-2" id="LinksCategoriesHolder">
         <a *ngFor="let link of links">
-          <div class="d-flex align-items-center">
-            <div class="p-2 iconHolder mx-2">
+          <div class="d-flex align-items-center" class="{{link.class}}">
+            <div class="p-2 iconHolder mx-2 {{link.iconColor}}">
               <img src="assets/svg/icons/{{ link.svgIconName }}.svg" alt="{{ link.imgAlt }}" class="linksIcons">
             </div>
             <small class="text-white">{{ link!.linkName }}</small>
@@ -45,11 +45,14 @@
     <div class="col-sm-7 col-lg-8 col-xl-9 p-3 ps-4 min-vh-100" id="secondDiv">
       <h4 class="text-white">Today's Listings</h4>
       <div class="row gy-3 mt-3" id="listingsMainContainer">
-        <div *ngFor="let cat of categories" class="d-flex flex-column listingSection col-12 col-lg-6 col-xl-4 me-1">
-          <img src="assets/img/listings/pc-gamer.jpg" alt="Listing Image" width="280" height="280">
-          <span class="mt-2 text-white">1 $</span>
-          <span class="my-2 text-white">Pc Gamer Rayzen Xs200 1050 Ti RTX Black</span>
-          <span class="text-white">Morocco</span>
+        <div *ngFor="let listing of listings" class="d-flex flex-column listingSection col-12 col-lg-6 col-xl-4 me-1">
+          <div *ngIf="!listings" class="d-flex justify-content-center align-items-center">
+                <span class="fw-bolder text-white">There is no listing yet in the application</span>
+          </div>
+          <img [src]="listing.fileHandling[0].url" alt="Listing Image" width="290" height="290">
+            <span class="mt-2 text-white fw-bold">{{ listing.price }} $</span>
+            <span class="my-2 text-white">{{ listing.description }}</span>
+            <span class="text-white">Morocco</span>
         </div>
       </div>
     </div>
