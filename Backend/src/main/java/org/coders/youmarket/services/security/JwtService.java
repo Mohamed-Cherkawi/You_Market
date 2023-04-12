@@ -31,6 +31,7 @@ public class JwtService {
     }
 
     public String generateToken(AppUser userDetails) {
+        map.put("userReference",userDetails.getReference());
         return generateToken(map, userDetails);
     }
 
