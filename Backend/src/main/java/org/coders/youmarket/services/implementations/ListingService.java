@@ -45,7 +45,7 @@ public class ListingService implements ListingServiceInterface {
 
         if(listings.isEmpty()){
             return ResponseHandler.generateResponse(
-                    "There is no listings with the given listings type : " + listingType.toString(),
+                    "There is no listings with the given listings type : " + listingType.name(),
                     HttpStatus.NOT_FOUND
             );
         }
