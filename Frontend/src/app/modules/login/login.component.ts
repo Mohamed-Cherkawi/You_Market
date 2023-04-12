@@ -59,8 +59,6 @@ export class LoginComponent implements OnInit {
               console.log(response);
 
               this.commonAuthService.handleUserToken(response.data.token);
-
-              this.commonAuthService.redirectToHome();
             },
           error:
             (error : HttpErrorResponse) => {
