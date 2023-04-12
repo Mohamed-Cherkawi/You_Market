@@ -12,7 +12,7 @@ export class ItemListingService {
   private restPath: string = environment.apisBaseUrl + "/api/listing/item/";
   constructor(private http: HttpClient) {}
 
-  public  createItemListing(request: FormData): Observable<ResponseEntity<ItemListing>> {
+  public createItemListing(request: FormData): Observable<ResponseEntity<ItemListing>> {
     return this.http.post<ResponseEntity<ItemListing>>(`${this.restPath}creating`,request);
   }
 }
