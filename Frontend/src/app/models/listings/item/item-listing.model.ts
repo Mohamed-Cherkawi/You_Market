@@ -1,7 +1,6 @@
 import {Listing} from "../Listing.model";
 import {AddressRequest} from "../../other/address-request.model";
 import {ItemProperties} from "./item-properties.model";
-import {FileHandle} from "../../other/file-handle.model";
 
 export interface ItemListing extends Listing{
   title: string;
@@ -10,5 +9,4 @@ export interface ItemListing extends Listing{
   doorPickup: boolean;
   doorDropOff: boolean;
   properties: ItemProperties;
-  fileHandling: FileHandle[];
 }
