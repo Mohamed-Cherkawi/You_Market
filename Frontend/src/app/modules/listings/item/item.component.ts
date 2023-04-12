@@ -98,6 +98,14 @@ export class ItemComponent implements OnInit{
           error:
             (error : HttpErrorResponse) => {
               console.log(error.error)
+              Swal.fire({
+                icon: 'error',
+                title: 'Your Listing wasn\'t saved successfully' ,
+                confirmButtonColor: 'red',
+                confirmButtonText: 'Ok',
+                html: "Something went wrong at server level ( error Code : <b>"+ error.status+ "</b> ) , Please try again later",
+                footer: "Error description : " + error.error
+              });
             }
         });
   }
@@ -105,7 +113,7 @@ export class ItemComponent implements OnInit{
   private prepareItemListingObject(): ItemListing {
     return  {
       fileHandling: this.filesArrayHolder,
-      ownerReference: 'HDHJD38638363JDH',
+      ownerReference: localStorage.getItem('userReference'),
       price: this.itemForm.get('price')?.value,
       description: this.itemForm.get('description')?.value,
       listingType: ListingType.ITEM,
