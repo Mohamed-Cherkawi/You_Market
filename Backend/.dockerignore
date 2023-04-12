@@ -1,0 +1,14 @@
+mvnw
+mvnw.cmd
+HELP.md
+*.log
+
+.idea/
+
+*.properties
+
+# exclude any unnecessary build artifacts or test files
+*.class
+*.xml
+
+src/test/
