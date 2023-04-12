@@ -33,6 +33,6 @@ public class Photo {
     private String type;
 
     @Lob
-    @Column(name = "pic_byte" , length = 50000000)
+    @Column(name = "pic_byte" , length = 500000000)
     private byte[] picByte;
 }
