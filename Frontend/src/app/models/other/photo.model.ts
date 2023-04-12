@@ -1,4 +1,6 @@
 export interface Photo {
   id: number;
-  imageUrl: string;
+  name: string;
+  type: string;
+  picByte: string;
 }
